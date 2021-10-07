@@ -5,9 +5,10 @@ body {
 	background: rgb(214, 236, 231);
 }
 header {
+    margin-bottom: 20px;
     background-color: rgb(175, 214, 205);
 }
-a {
+body a {
     padding: 10px;
     color: rgb(26, 43, 138);
     font-family: 'Ubuntu', sans-serif;
