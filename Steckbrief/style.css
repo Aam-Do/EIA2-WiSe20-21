@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+	font-family: arial;
+	font-size: small;
+	background: rgb(214, 236, 231);
+}
+header {
+    background-color: rgb(175, 214, 205);
+}
+a {
+    padding: 10px;
+    color: rgb(26, 43, 138);
+    font-family: 'Ubuntu', sans-serif;
+}
+a:visited {
+    color: rgb(119, 75, 163);
+}
