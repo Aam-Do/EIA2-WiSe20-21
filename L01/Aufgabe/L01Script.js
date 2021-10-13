@@ -18,4 +18,4 @@ var RandomPoem;
         return (verse);
     }
 })(RandomPoem || (RandomPoem = {}));
-//# sourceMappingURL=Script.js.map
+//# sourceMappingURL=L01Script.js.map
