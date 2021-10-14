@@ -1,15 +1,18 @@
-body {
+body, html {
+    height: 100%;
     margin: 0;
 	font-family: arial;
-	font-size: small;
+	font-size: 85%;
 	background: rgb(214, 236, 231);
 }
 header {
+    height: 6%;
     margin-bottom: 20px;
     background-color: rgb(175, 214, 205);
 }
-header a {
-    font-size: smaller;
+header img {
+    height: 100%;
+    width: auto;
 }
 body p {
     display: inline;
@@ -24,8 +27,8 @@ a:visited {
     color: rgb(119, 75, 163);
 }
 div {
-    background-color: honeydew;
+    background-color: rgb(231, 247, 243);
     width: fit-content;
-    padding: 8px;
-    margin: 10px;
+    padding: 1%;
+    margin: 2%;
 }
