@@ -4,6 +4,7 @@ var L02EventInspector;
     var div0;
     var div1;
     var span;
+    var button;
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
         document.addEventListener("mousemove", handleMouseMove);
@@ -11,14 +12,17 @@ var L02EventInspector;
         div0 = document.querySelector("#div0");
         div1 = document.querySelector("#div1");
         span = document.querySelector("span");
+        button = document.querySelector("button");
         document.addEventListener("click", handleClick);
         document.addEventListener("keyup", handleKeyUp);
+        document.addEventListener("buttonClick", handleButtonBubble);
         body.addEventListener("click", handleClick);
         body.addEventListener("keyup", handleKeyUp);
         div0.addEventListener("click", handleClick);
         div0.addEventListener("keyup", handleKeyUp);
         div1.addEventListener("click", handleClick);
         div1.addEventListener("keyup", handleKeyUp);
+        button.addEventListener("click", handleButtonClick);
     }
     function handleMouseMove(_event) {
         setInfoBox(_event);
@@ -41,6 +45,13 @@ var L02EventInspector;
         console.log("Current Target: " + _event.currentTarget);
         console.log("Event object: " + _event);
         console.groupEnd();
+    }
+    function handleButtonClick(_event) {
+        var buttonEvent = new CustomEvent("buttonClick", { bubbles: true });
+        button.dispatchEvent(buttonEvent);
+    }
+    function handleButtonBubble(_event) {
+        console.log(_event);
     }
 })(L02EventInspector || (L02EventInspector = {}));
 //# sourceMappingURL=script.js.map

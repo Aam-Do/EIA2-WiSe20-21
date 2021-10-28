@@ -4,6 +4,7 @@ namespace L02EventInspector {
     let div0: HTMLDivElement;
     let div1: HTMLDivElement;
     let span: HTMLSpanElement;
+    let button: HTMLButtonElement;
 
     window.addEventListener("load", handleLoad);
 
@@ -14,9 +15,11 @@ namespace L02EventInspector {
         div0 = document.querySelector("#div0");
         div1 = document.querySelector("#div1");
         span = document.querySelector("span");
+        button = document.querySelector("button");
 
         document.addEventListener("click", handleClick);
         document.addEventListener("keyup", handleKeyUp);
+        document.addEventListener("buttonClick", handleButtonBubble)
 
         body.addEventListener("click", handleClick);
         body.addEventListener("keyup", handleKeyUp);
@@ -26,6 +29,8 @@ namespace L02EventInspector {
 
         div1.addEventListener("click", handleClick);
         div1.addEventListener("keyup", handleKeyUp);
+
+        button.addEventListener("click", handleButtonClick);
     }
 
     function handleMouseMove(_event: MouseEvent): void {
@@ -53,5 +58,14 @@ namespace L02EventInspector {
         console.log("Current Target: " + _event.currentTarget);
         console.log("Event object: " + _event)
         console.groupEnd();
+    }
+
+    function handleButtonClick(_event: MouseEvent): void {
+        let buttonEvent : CustomEvent = new CustomEvent("buttonClick", {bubbles: true});
+        button.dispatchEvent(buttonEvent);
+    }
+
+    function handleButtonBubble(_event: CustomEvent): void {
+        console.log(_event);
     }
 }
