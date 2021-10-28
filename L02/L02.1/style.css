@@ -1,0 +1,20 @@
+html, body {
+    margin: 0px;
+    height: 100%;
+    background-color: snow;
+}
+div {
+    display: inline-block;
+    width: 40%;
+    height: 40%;
+    background-color: plum;
+}
+#div0 {
+    background-color: rgb(168, 220, 230);
+}
+span {
+    position: fixed;
+    background-color: rgb(241, 248, 176);
+    border: 1px solid black;
+    padding: 2px;
+}
