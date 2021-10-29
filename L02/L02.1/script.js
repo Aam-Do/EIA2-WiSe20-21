@@ -28,11 +28,14 @@ var L02EventInspector;
         setInfoBox(_event);
     }
     function setInfoBox(_event) {
-        span.innerHTML = "Position: x = " + _event.clientX + ", y = " + _event.clientY + "<br>" + "Event target: " + _event.target;
+        span.innerHTML = "Position: x = " + _event.clientX + ", y = " + _event.clientY + "<br>";
+        span.innerHTML += "Event target: " + _event.target;
         span.style.top = (_event.clientY + 12) + "px";
         span.style.left = (_event.clientX + 8) + "px";
     }
     function handleClick(_event) {
+        if (_event.target == button)
+            return;
         logInfo(_event);
     }
     function handleKeyUp(_event) {
@@ -41,9 +44,9 @@ var L02EventInspector;
     function logInfo(_event) {
         console.group("Event Infos");
         console.log("Event type: " + _event.type);
-        console.log("Target: " + _event.target);
-        console.log("Current Target: " + _event.currentTarget);
-        console.log("Event object: " + _event);
+        console.log("Target: ", _event.target);
+        console.log("Current Target: ", _event.currentTarget);
+        console.log("Event object: ", _event);
         console.groupEnd();
     }
     function handleButtonClick(_event) {
