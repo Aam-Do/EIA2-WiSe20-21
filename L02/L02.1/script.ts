@@ -38,7 +38,7 @@ namespace L02EventInspector {
     }
 
     function setInfoBox(_event: MouseEvent): void {
-        span.innerHTML = "Position: x = " + _event.clientX + ", y = " + _event.clientY;
+        span.innerHTML = "Position: x = " + _event.clientX + ", y = " + _event.clientY + "<br>" + "Event target: " + _event.target;
         span.style.top = (_event.clientY + 12) + "px";
         span.style.left = (_event.clientX + 8) + "px";
     }
