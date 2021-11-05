@@ -19,7 +19,7 @@ namespace L02EventInspector {
 
         document.addEventListener("click", handleClick);
         document.addEventListener("keyup", handleKeyUp);
-        document.addEventListener("buttonClick", handleButtonBubble)
+        document.addEventListener("buttonClick", handleButtonBubble);
 
         body.addEventListener("click", handleClick);
         body.addEventListener("keyup", handleKeyUp);
