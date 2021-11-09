@@ -1,10 +1,11 @@
+"use strict";
 var L02EventInspector;
 (function (L02EventInspector) {
-    var body;
-    var div0;
-    var div1;
-    var span;
-    var button;
+    let body;
+    let div0;
+    let div1;
+    let span;
+    let button;
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
         document.addEventListener("mousemove", handleMouseMove);
@@ -50,7 +51,7 @@ var L02EventInspector;
         console.groupEnd();
     }
     function handleButtonClick(_event) {
-        var buttonEvent = new CustomEvent("buttonClick", { bubbles: true });
+        let buttonEvent = new CustomEvent("buttonClick", { bubbles: true });
         button.dispatchEvent(buttonEvent);
     }
     function handleButtonBubble(_event) {

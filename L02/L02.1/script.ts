@@ -11,11 +11,11 @@ namespace L02EventInspector {
     function handleLoad(_event: Event): void {
         document.addEventListener("mousemove", handleMouseMove);
 
-        body = document.querySelector("body");
-        div0 = document.querySelector("#div0");
-        div1 = document.querySelector("#div1");
-        span = document.querySelector("span");
-        button = document.querySelector("button");
+        body = <HTMLBodyElement>document.querySelector("body");
+        div0 = <HTMLDivElement>document.querySelector("#div0");
+        div1 = <HTMLDivElement>document.querySelector("#div1");
+        span = <HTMLSpanElement>document.querySelector("span");
+        button = <HTMLButtonElement>document.querySelector("button");
 
         document.addEventListener("click", handleClick);
         document.addEventListener("keyup", handleKeyUp);
