@@ -19,9 +19,10 @@ var L03_1_Sequenz;
     }
     function prepareGame(_event) {
         formData = new FormData(document.forms[0]);
-        console.log(formData);
-        console.log(formData.get("size"));
-        console.log(formData.get("prepTime"));
+        if (formData.get("word") == "") {
+            alert("'Sequenz' muss ausgefüllt sein!");
+            return;
+        }
         let body = document.querySelector("body");
         body.innerHTML = " ";
         wrongFeedback = document.createElement("span");
@@ -34,7 +35,29 @@ var L03_1_Sequenz;
         // correctFeedback.appendChild(correctFeedbackId);
         body.appendChild(wrongFeedback);
         body.appendChild(correctFeedback);
-        prepTime = formData.get("prepTime");
+        prepTime = Number(formData.get("prepTime"));
+        gameTime = Number(formData.get("gameTime"));
+        word = formData.get("word")?.toString();
+        createGameScreen();
+        // setInterval(handleTime(), 1000);
+    }
+    function createGameScreen() {
+        gameField = document.createElement("div");
+        gameField.style.backgroundColor = formData.get("background")?.toString();
+        // set respective css rules to designated values
+        timer = document.createElement("span");
+        let timerId = document.createAttribute("id");
+        timerId.value = "timer";
+        // timer.appendChild(timerId);
+        let body = document.querySelector("body");
+        body.appendChild(gameField);
+        body.appendChild(timer);
+        sequence = word.split("");
+        let randomSequence = [...sequence];
+        for (let i = 0; i < sequence.length; i++) {
+            let span = document.createElement("span");
+            let spanId;
+        }
     }
 })(L03_1_Sequenz || (L03_1_Sequenz = {}));
 //# sourceMappingURL=Script.js.map
