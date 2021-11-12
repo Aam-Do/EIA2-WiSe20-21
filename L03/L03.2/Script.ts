@@ -49,7 +49,7 @@ namespace L03_1_Sequenz {
         
         createGameScreen();
 
-        // setInterval(handleTime(), 1000);
+        setInterval(handleTime, 1000);
     }
 
     function createGameScreen(): void {
@@ -62,6 +62,7 @@ namespace L03_1_Sequenz {
         let timerId: Attr = document.createAttribute("id");
         timerId.value = "timer"
         // timer.appendChild(timerId);
+        timer.innerHTML = prepTime.toString();
 
         let body: HTMLBodyElement = <HTMLBodyElement>document.querySelector("body");
         body.appendChild(gameField);
@@ -73,12 +74,48 @@ namespace L03_1_Sequenz {
 
         for (let i = 0; i < sequence.length; i++) {
             let span: HTMLSpanElement = document.createElement("span");
-            let spanId: Attr
+            let spanId: Attr = document.createAttribute("id");
             
+            let random: number = Math.floor(Math.random() * randomSequence.length);
+            console.log(random);
+
+            spanId.value = (randomSequence.splice(random, 1)).join();
+            
+            span.innerHTML = spanId.value;
+            gameField.appendChild(span);
+            // span.appendChild(spanId);
         }
 
     }
 
+    function handleTime(): void {
+        if (gameOn == true) {
+            if (gameTime == 0) {
+                // endGame();
+            } else {
+                gameTime--
+                timer.innerHTML = gameTime.toString();
+            }
+        } else {
+            if (prepTime == 0) {
+                startGame();
+            } else {
+                prepTime--
+                timer.innerHTML = prepTime.toString();
+            }
+        }
+    }
 
+    function startGame(): void {
+        for (let i = 0; i < gameField.childElementCount; i++) {
+            gameField.children[i].innerHTML = " ";
+        }
+        gameField.addEventListener("pointerdown", turnCard);
+        gameOn = true;
+    }
+
+    function turnCard(): void {
+        
+    }
 
 }
