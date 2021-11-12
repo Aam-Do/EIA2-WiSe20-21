@@ -30,11 +30,13 @@ namespace L03_1_Sequenz {
         body.innerHTML = " ";
 
         wrongFeedback = document.createElement("span");
+        wrongFeedback.classList.add("hidden");
         let wrongFeedbackId: Attr = document.createAttribute("id");
         wrongFeedbackId.value = "wrongFeedback";
         // wrongFeedback.appendChild(wrongFeedbackId);
 
         correctFeedback = document.createElement("span");
+        correctFeedback.classList.add("hidden");
         let correctFeedbackId: Attr = document.createAttribute("id");
         correctFeedbackId.value = "correctFeedback";
         // correctFeedback.appendChild(correctFeedbackId);
@@ -82,6 +84,7 @@ namespace L03_1_Sequenz {
             spanId.value = (randomSequence.splice(random, 1)).join();
             
             span.innerHTML = spanId.value;
+            span.classList.add("front")
             gameField.appendChild(span);
             // span.appendChild(spanId);
         }
@@ -109,13 +112,16 @@ namespace L03_1_Sequenz {
     function startGame(): void {
         for (let i = 0; i < gameField.childElementCount; i++) {
             gameField.children[i].innerHTML = " ";
+            gameField.children[i].classList.remove("front");
+            gameField.children[i].classList.add("back");
         }
         gameField.addEventListener("pointerdown", turnCard);
         gameOn = true;
     }
 
-    function turnCard(): void {
-        
+    function turnCard(_event: PointerEvent): void {
+        let card: HTMLElement = <HTMLElement>_event.target;
+        console.log(card);
     }
 
 }

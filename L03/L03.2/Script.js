@@ -26,10 +26,12 @@ var L03_1_Sequenz;
         let body = document.querySelector("body");
         body.innerHTML = " ";
         wrongFeedback = document.createElement("span");
+        wrongFeedback.classList.add("hidden");
         let wrongFeedbackId = document.createAttribute("id");
         wrongFeedbackId.value = "wrongFeedback";
         // wrongFeedback.appendChild(wrongFeedbackId);
         correctFeedback = document.createElement("span");
+        correctFeedback.classList.add("hidden");
         let correctFeedbackId = document.createAttribute("id");
         correctFeedbackId.value = "correctFeedback";
         // correctFeedback.appendChild(correctFeedbackId);
@@ -62,6 +64,7 @@ var L03_1_Sequenz;
             console.log(random);
             spanId.value = (randomSequence.splice(random, 1)).join();
             span.innerHTML = spanId.value;
+            span.classList.add("front");
             gameField.appendChild(span);
             // span.appendChild(spanId);
         }
@@ -89,11 +92,15 @@ var L03_1_Sequenz;
     function startGame() {
         for (let i = 0; i < gameField.childElementCount; i++) {
             gameField.children[i].innerHTML = " ";
+            gameField.children[i].classList.remove("front");
+            gameField.children[i].classList.add("back");
         }
         gameField.addEventListener("pointerdown", turnCard);
         gameOn = true;
     }
-    function turnCard() {
+    function turnCard(_event) {
+        let card = _event.target;
+        console.log(card);
     }
 })(L03_1_Sequenz || (L03_1_Sequenz = {}));
 //# sourceMappingURL=Script.js.map
