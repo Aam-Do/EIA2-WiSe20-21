@@ -10,6 +10,7 @@ namespace L03_1_Sequenz {
     let wrongFeedback: HTMLSpanElement;
     let correctFeedback: HTMLSpanElement;
     let formData: FormData;
+    let countDown: number;
 
     window.addEventListener("load", handleLoad);
 
@@ -31,27 +32,21 @@ namespace L03_1_Sequenz {
 
         wrongFeedback = document.createElement("span");
         wrongFeedback.classList.add("hidden");
-        let wrongFeedbackId: Attr = document.createAttribute("id");
-        wrongFeedbackId.value = "wrongFeedback";
-        // wrongFeedback.appendChild(wrongFeedbackId);
-
+        wrongFeedback.id = "wrongFeedback";
+        wrongFeedback.innerHTML = "Falsch! Versuchs nochmal"
         correctFeedback = document.createElement("span");
         correctFeedback.classList.add("hidden");
-        let correctFeedbackId: Attr = document.createAttribute("id");
-        correctFeedbackId.value = "correctFeedback";
-        // correctFeedback.appendChild(correctFeedbackId);
-
+        correctFeedback.id = "correctFeedback";
+        correctFeedback.innerHTML = "Korrekt! Sehr gut!"
         body.appendChild(wrongFeedback);
         body.appendChild(correctFeedback);
 
         prepTime = Number(formData.get("prepTime"));
         gameTime = Number(formData.get("gameTime"));
-
         word = <string>formData.get("word")?.toString();
         
         createGameScreen();
-
-        setInterval(handleTime, 1000);
+        countDown = setInterval(handleTime, 1000);
     }
 
     function createGameScreen(): void {
@@ -61,9 +56,7 @@ namespace L03_1_Sequenz {
         // set respective css rules to designated values
 
         timer = document.createElement("span");
-        let timerId: Attr = document.createAttribute("id");
-        timerId.value = "timer"
-        // timer.appendChild(timerId);
+        timer.id = "timer"
         timer.innerHTML = prepTime.toString();
 
         let body: HTMLBodyElement = <HTMLBodyElement>document.querySelector("body");
@@ -71,30 +64,24 @@ namespace L03_1_Sequenz {
         body.appendChild(timer);
 
         sequence = word.split("");
-        
         let randomSequence: string[] = [...sequence];
 
         for (let i = 0; i < sequence.length; i++) {
             let span: HTMLSpanElement = document.createElement("span");
-            let spanId: Attr = document.createAttribute("id");
-            
             let random: number = Math.floor(Math.random() * randomSequence.length);
             console.log(random);
 
-            spanId.value = (randomSequence.splice(random, 1)).join();
-            
-            span.innerHTML = spanId.value;
+            span.id = (randomSequence.splice(random, 1)).join();
+            span.innerHTML = span.id;
             span.classList.add("front")
             gameField.appendChild(span);
-            // span.appendChild(spanId);
         }
-
     }
 
     function handleTime(): void {
         if (gameOn == true) {
             if (gameTime == 0) {
-                // endGame();
+                endGame();
             } else {
                 gameTime--
                 timer.innerHTML = gameTime.toString();
@@ -117,11 +104,56 @@ namespace L03_1_Sequenz {
         }
         gameField.addEventListener("pointerdown", turnCard);
         gameOn = true;
+        timer.innerHTML = gameTime.toString();
     }
 
     function turnCard(_event: PointerEvent): void {
         let card: HTMLElement = <HTMLElement>_event.target;
-        console.log(card);
+        
+        if (card.classList.contains("back") == false) {
+            return;
+        }
+
+        card.classList.remove("back");
+        card.classList.add("front");
+        card.innerHTML = card.id;
+
+        if (card.id != sequence[streak]) {
+            sendFalseFeedback();
+            return;
+        }
+        streak++;
+        if (streak == sequence.length) {
+            clearInterval(countDown);
+            correctFeedback.classList.remove("hidden");
+            gameField.removeEventListener("pointerdown", turnCard);
+        }
     }
 
+    function sendFalseFeedback(): void {
+        wrongFeedback.classList.remove("hidden");
+        gameField.removeEventListener("pointerdown", turnCard);
+        streak = 0;
+    
+        setTimeout(function(): void {
+            wrongFeedback.classList.add("hidden");
+            gameField.addEventListener("pointerdown", turnCard);
+            for (let i = 0; i < gameField.childElementCount; i++) {
+                gameField.children[i].innerHTML = " ";
+                gameField.children[i].classList.remove("front");
+                gameField.children[i].classList.add("back");         
+            }
+        }
+        , 2000 )
+    }
+
+    function endGame(): void {
+        clearInterval(countDown);
+        let body: HTMLBodyElement = <HTMLBodyElement>document.querySelector("body");
+        body.removeChild(gameField);
+        body.removeChild(timer);
+        let gameOver: HTMLHeadingElement = document.createElement("h1");
+        gameOver.innerHTML = "Die Zeit ist um! Du hast verloren :("
+        body.appendChild(gameOver);
+    }
 }
