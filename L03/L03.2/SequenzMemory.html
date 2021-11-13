@@ -8,6 +8,9 @@
     <script src="Script.js"></script>
     <title>Sequenzmemory</title>
 </head>
+<header>
+    <h1>Sequenzmemory</h1>
+</header>
 <body>
     <form id="settings">
         <fieldset>
@@ -19,7 +22,7 @@
             <label for="background">Hintergrund</label>
             <input type="color" name="background" value="#ffffff">
             <label for="back">Kartenrückseite</label>
-            <input type="color" name="back" value="#0000ff">
+            <input type="color" name="back" value="#008080">
             <label for="fontColor">Schrift</label>
             <input type="color" name="fontColor" value="#000000">
         </fieldset>
@@ -37,13 +40,13 @@
             <label for="prepTime">Vorbereitungszeit</label>
             <input type="number" name="prepTime" step="1" min="1" max="10" value="5">
             <label for="gameTime">Spielzeit</label>
-            <input type="number" name="gameTime" step="1" min="5" max="120" value="60">
+            <input type="number" name="gameTime" step="1" min="5" max="120" value="30">
         </fieldset>
         <fieldset>
             <legend>Sequenz</legend>
-            <input type="text" name="word" placeholder="Memory" value="Memory" required>
+            <input type="text" name="word" placeholder="Memory" required>
         </fieldset>
+        <button type="button" id="startButton">Spiel starten</button>
     </form>
-    <button id="startButton">Spiel starten</button>
 </body>
 </html>

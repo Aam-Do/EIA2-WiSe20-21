@@ -24,8 +24,9 @@ var L03_1_Sequenz;
             alert("'Sequenz' muss ausgefüllt sein!");
             return;
         }
+        let form = document.querySelector("form");
         let body = document.querySelector("body");
-        body.innerHTML = " ";
+        body.removeChild(form);
         wrongFeedback = document.createElement("span");
         wrongFeedback.classList.add("hidden");
         wrongFeedback.id = "wrongFeedback";
@@ -33,7 +34,7 @@ var L03_1_Sequenz;
         correctFeedback = document.createElement("span");
         correctFeedback.classList.add("hidden");
         correctFeedback.id = "correctFeedback";
-        correctFeedback.innerHTML = "Korrekt! Sehr gut!";
+        correctFeedback.innerHTML = "Das ist korrekt! Sehr gut!";
         body.appendChild(wrongFeedback);
         body.appendChild(correctFeedback);
         prepTime = Number(formData.get("prepTime"));
@@ -45,7 +46,9 @@ var L03_1_Sequenz;
     function createGameScreen() {
         gameField = document.createElement("div");
         gameField.style.backgroundColor = formData.get("background")?.toString();
-        // set respective css rules to designated values
+        // set css rules for colors, text size and font to their desginated values from formData
+        // according to the Activity Diagram.
+        // Implementation not possible due to lack of time and knowledge, but theoretically possible
         timer = document.createElement("span");
         timer.id = "timer";
         timer.innerHTML = prepTime.toString();
@@ -132,7 +135,7 @@ var L03_1_Sequenz;
         let body = document.querySelector("body");
         body.removeChild(gameField);
         body.removeChild(timer);
-        let gameOver = document.createElement("h1");
+        let gameOver = document.createElement("h2");
         gameOver.innerHTML = "Die Zeit ist um! Du hast verloren :(";
         body.appendChild(gameOver);
     }
