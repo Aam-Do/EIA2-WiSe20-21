@@ -68,7 +68,7 @@ namespace L02EventInspector {
         button.dispatchEvent(buttonEvent);
     }
 
-    function handleButtonBubble(_event: CustomEvent): void {
+    function handleButtonBubble(_event: Event): void {
         console.log(_event);
     }
 }
