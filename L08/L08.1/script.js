@@ -92,7 +92,7 @@ var Art;
         for (let i = 0; i < amountOfCircles; i++) {
             let hue;
             let hsl = "hsl(";
-            let saturation = ", 85%";
+            let saturation = ", 86%";
             let light = ", 90%, ";
             let alpha;
             hue = (360 * Math.random()).toString();

@@ -88,6 +88,7 @@ namespace Art {
     }
 
     function drawLines(): void {
+
         let amountOfLines: number = Math.round(14 * Math.random()) + 1;
     
         for (let i = 0; i < amountOfLines; i++) {
@@ -122,7 +123,7 @@ namespace Art {
 
             let hue: string;
             let hsl: string = "hsl(";
-            let saturation: string = ", 85%";
+            let saturation: string = ", 86%";
             let light: string = ", 90%, "
             let alpha: string;
 
@@ -155,7 +156,4 @@ namespace Art {
             crc2.resetTransform();
         }
     }
-        
-
-
 }
