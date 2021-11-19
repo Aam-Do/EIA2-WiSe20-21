@@ -104,8 +104,8 @@ namespace Art {
             crc2.translate((crc2.canvas.width * Math.random()), (crc2.canvas.height * Math.random()));
             crc2.rotate((320 * Math.random()) * Math.PI / 180);
             crc2.scale(((2 * Math.random()) + 1), (2 * Math.random()));
-            crc2.moveTo(-50, 0);
-            crc2.lineTo(50, 0);
+            crc2.moveTo(-100, 0);
+            crc2.lineTo(100, 0);
             crc2.closePath();
 
             crc2.lineWidth = 4;
