@@ -24,7 +24,7 @@ function bePog(): void {
                 let gradient1: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
 
                 for (let i = 0; i < 3; i++) {
-                    let random: number = Math.round(360 * Math.random());
+                    let random: number = 360 * Math.random();
                     hue.push(random.toString());  
                 }
 
@@ -37,11 +37,10 @@ function bePog(): void {
                 break;
             case 4:
             case 5:
-                console.log("Circle! " + i);
                 let gradient2: CanvasGradient = crc2.createLinearGradient(0, 0, 0, (crc2.canvas.height / 5));
 
                 for (let i = 0; i < 2; i++) {
-                    let random: number = Math.round(360 * Math.random());
+                    let random: number = 360 * Math.random();
                     hue.push(random.toString());  
                 }
 
@@ -64,7 +63,7 @@ function bePog(): void {
                 let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
 
                 for (let i = 0; i < 3; i++) {
-                    let random: number = Math.round(360 * Math.random());
+                    let random: number = 360 * Math.random();
                     hue.push(random.toString());  
                 }
 
