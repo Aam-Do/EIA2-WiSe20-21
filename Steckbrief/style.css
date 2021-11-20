@@ -19,6 +19,7 @@ body p {
     display: inline;
 }
 body a {
+    margin-top: 1%;
     display: inline;
     padding: 10px;
     color: rgb(26, 43, 138);
