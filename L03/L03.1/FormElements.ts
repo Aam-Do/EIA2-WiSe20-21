@@ -1,8 +1,10 @@
 namespace L03_FormElements {
+
     window.addEventListener("load", init);
 
     function init(_event: Event): void {
         console.log("Init");
+
         let fieldsets: NodeListOf<HTMLFieldSetElement> = document.querySelectorAll("fieldset");
 
         // Install listeners on fieldsets
