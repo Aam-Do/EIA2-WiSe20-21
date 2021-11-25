@@ -32,9 +32,6 @@ var Test;
         backgroundGradient.addColorStop(.9, "HSL(25, 100%, 49%)");
         crc2.fillStyle = backgroundGradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height * golden);
-        // backgroundGradient.addColorStop(1, "HSL(122, 30%, 81%)");
-        // backgroundGradient.addColorStop(.8, "HSL(98, 22%, 45%)");
-        // backgroundGradient.addColorStop(1, "HSL(18, 68%, 27%)");
     }
     function drawSun() {
         console.log("Sun");
@@ -45,7 +42,7 @@ var Test;
         gradient.addColorStop(1, "HSLA(40, 100%, 50%, 0)");
         crc2.save();
         let x = Math.random() * crc2.canvas.width;
-        let y = (Math.random() * 150 * golden) + 200;
+        let y = (Math.random() * ((crc2.canvas.height * golden) - 150)) + 150;
         crc2.translate(x, y);
         crc2.globalCompositeOperation = "lighten";
         crc2.fillStyle = gradient;
@@ -81,26 +78,27 @@ var Test;
     }
     function drawFog() {
         console.log("Fog");
-        let nParticles = 40;
         let radiusParticle = 60;
         let particle = new Path2D();
         let gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+        let x = 0;
+        let stepMin = 10;
+        let stepMax = 50;
         particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-        gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.3)");
-        gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
+        gradient.addColorStop(0, "HSLA(200, 100%, 90%, 0.3)");
+        gradient.addColorStop(1, "HSLA(200, 100%, 90%, 0)");
         crc2.save();
-        crc2.translate(0, (crc2.canvas.height * golden) - 15);
+        crc2.translate(0, crc2.canvas.height * golden);
         crc2.fillStyle = gradient;
         crc2.globalCompositeOperation = "overlay";
-        for (let drawn = 0; drawn < nParticles; drawn++) {
-            let x = (Math.random() * 50) + 0.5;
-            let y = Math.random() * 3;
-            if (y > 2) {
-                y = -y;
-            }
+        do {
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            let y = -10 - Math.random() * (20 - 10);
+            crc2.save();
             crc2.translate(x, y);
             crc2.fill(particle);
-        }
+            crc2.restore();
+        } while (x < crc2.canvas.width);
         crc2.restore();
     }
 })(Test || (Test = {}));

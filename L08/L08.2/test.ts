@@ -29,9 +29,7 @@ namespace Test {
 
 
         crc2.fillStyle = backgroundGradient;
-        crc2.fillRect(0,  crc2.canvas.height * golden, crc2.canvas.width, crc2.canvas.height);
-        
-       
+        crc2.fillRect(0, crc2.canvas.height * golden, crc2.canvas.width, crc2.canvas.height);
     }
 
     function drawSky(): void {
@@ -48,11 +46,6 @@ namespace Test {
 
         crc2.fillStyle = backgroundGradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height * golden);
-        
-        // backgroundGradient.addColorStop(1, "HSL(122, 30%, 81%)");
-        // backgroundGradient.addColorStop(.8, "HSL(98, 22%, 45%)");
-        // backgroundGradient.addColorStop(1, "HSL(18, 68%, 27%)");
-
     }
 
     function drawSun(): void {
@@ -68,7 +61,7 @@ namespace Test {
         crc2.save();
 
         let x: number = Math.random() * crc2.canvas.width;
-        let y: number = (Math.random() * 150 * golden) + 200;
+        let y: number = (Math.random() * ((crc2.canvas.height * golden) - 150)) + 150;
         crc2.translate(x, y);
 
         crc2.globalCompositeOperation = "lighten";
@@ -102,7 +95,7 @@ namespace Test {
         crc2.closePath();
 
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, -150);
-        
+
         gradient.addColorStop(0, "HSL(122, 25%, 75%)");
         gradient.addColorStop(.1, "HSL(340, 6%, 52%)");
         gradient.addColorStop(.3, "HSL(342, 14%, 45%)");
@@ -118,30 +111,32 @@ namespace Test {
     function drawFog(): void {
         console.log("Fog");
 
-        let nParticles: number = 40;
+    
         let radiusParticle: number = 60;
         let particle: Path2D = new Path2D();
         let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+        let x: number = 0;
+        let stepMin: number = 10;
+        let stepMax: number = 50;
 
         particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-        gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.3)");
-        gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
+        gradient.addColorStop(0, "HSLA(200, 100%, 90%, 0.3)");
+        gradient.addColorStop(1, "HSLA(200, 100%, 90%, 0)");
 
         crc2.save();
-        crc2.translate(0, (crc2.canvas.height * golden) - 15);
+        crc2.translate(0, crc2.canvas.height * golden);
         crc2.fillStyle = gradient;
         crc2.globalCompositeOperation = "overlay";
 
-
-        for (let drawn: number = 0; drawn < nParticles; drawn++) {
-            let x: number = (Math.random() * 50) + 0.5;
-            let y: number = Math.random() * 3;
-            if (y > 2) {
-                y = -y;
-            }
+        do {
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            let y: number = - 10 - Math.random() * (20- 10);
+            crc2.save();
             crc2.translate(x, y);
             crc2.fill(particle);
-        }
+            crc2.restore();
+        } while (x < crc2.canvas.width);
+
         crc2.restore();
     }
 
