@@ -41,6 +41,7 @@ namespace Autumn {
         drawMountains(mountainPos, mountainMin, mountainMax);
         drawGround();
         drawFog(fogPos);
+        drawTree();
     }
 
     function calculateRandom(_min: number, _max: number): number {
@@ -48,8 +49,50 @@ namespace Autumn {
         return(random);
     }
 
+    function drawTree(): void {
+        console.log("Tree");
+
+        crc2.translate(200, 600);
+        let nBranches: number = 50;
+        let maxRadius: number = 60;
+        let branch: Path2D = new Path2D();
+        branch.arc(0, 0, maxRadius, 0, 2 * Math.PI);
+
+        crc2.fillStyle = "brown";
+        crc2.beginPath();
+        crc2.moveTo(-30, 0);
+        crc2.lineTo(-15, -300);
+        crc2.lineTo(15, -300);
+        crc2.lineTo(30, 0);
+        crc2.closePath();
+        crc2.fill();
+
+        crc2.save();
+        crc2.translate(0, -250);
+
+        do {
+            let y: number = Math.random() * 250;
+            let size: number = 1 - y / 500;
+            let x: number = (Math.random() - 0.5) * 2 * maxRadius;
+
+            crc2.save();
+            crc2.translate(0, -y);
+            crc2.scale(size, size);
+            crc2.translate(x, 0);
+
+            let colorAngle: number = Math.random() * 68 + 2;
+            let color: string = "HSLA(" + colorAngle + ", 60%, 50%, 0.5)";
+
+            crc2.fillStyle = color;
+            crc2.fill(branch);
+
+            crc2.restore();
+        } while (--nBranches > 0);
+        crc2.restore();
+    }
+
     function drawGround(): void {
-        let backgroundGradient: CanvasGradient = crc2.createLinearGradient(0, horizon, 0, crc2.canvas.height);
+        let backgroundGradient: CanvasGradient = crc2.createLinearGradient(0, horizon - 5, 0, crc2.canvas.height);
 
         backgroundGradient.addColorStop(0, "HSL(122, 25%, 75%)");
         backgroundGradient.addColorStop(.26, "HSL(98, 22%, 45%)");
@@ -57,7 +100,7 @@ namespace Autumn {
 
 
         crc2.fillStyle = backgroundGradient;
-        crc2.fillRect(0, horizon, crc2.canvas.width, crc2.canvas.height);
+        crc2.fillRect(0, horizon - 5, crc2.canvas.width, crc2.canvas.height);
     }
 
     function drawSky(): void {

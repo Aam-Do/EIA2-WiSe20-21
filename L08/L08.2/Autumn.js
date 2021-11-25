@@ -31,18 +31,52 @@ var Autumn;
         drawMountains(mountainPos, mountainMin, mountainMax);
         drawGround();
         drawFog(fogPos);
+        drawTree();
     }
     function calculateRandom(_min, _max) {
         let random = (Math.random() * (_max - _min)) + _min;
         return (random);
     }
+    function drawTree() {
+        console.log("Tree");
+        crc2.translate(200, 600);
+        let nBranches = 50;
+        let maxRadius = 60;
+        let branch = new Path2D();
+        branch.arc(0, 0, maxRadius, 0, 2 * Math.PI);
+        crc2.fillStyle = "brown";
+        crc2.beginPath();
+        crc2.moveTo(-30, 0);
+        crc2.lineTo(-15, -300);
+        crc2.lineTo(15, -300);
+        crc2.lineTo(30, 0);
+        crc2.closePath();
+        crc2.fill();
+        crc2.save();
+        crc2.translate(0, -250);
+        do {
+            let y = Math.random() * 250;
+            let size = 1 - y / 500;
+            let x = (Math.random() - 0.5) * 2 * maxRadius;
+            crc2.save();
+            crc2.translate(0, -y);
+            crc2.scale(size, size);
+            crc2.translate(x, 0);
+            let colorAngle = Math.random() * 68 + 2;
+            let color = "HSLA(" + colorAngle + ", 60%, 50%, 0.5)";
+            crc2.fillStyle = color;
+            crc2.fill(branch);
+            crc2.restore();
+        } while (--nBranches > 0);
+        crc2.restore();
+    }
     function drawGround() {
-        let backgroundGradient = crc2.createLinearGradient(0, horizon, 0, crc2.canvas.height);
+        let backgroundGradient = crc2.createLinearGradient(0, horizon - 5, 0, crc2.canvas.height);
         backgroundGradient.addColorStop(0, "HSL(122, 25%, 75%)");
         backgroundGradient.addColorStop(.26, "HSL(98, 22%, 45%)");
         backgroundGradient.addColorStop(1, "HSL(18, 68%, 27%)");
         crc2.fillStyle = backgroundGradient;
-        crc2.fillRect(0, horizon, crc2.canvas.width, crc2.canvas.height);
+        crc2.fillRect(0, horizon - 5, crc2.canvas.width, crc2.canvas.height);
     }
     function drawSky() {
         crc2.fillStyle = "HSL(227, 64%, 32%)";
