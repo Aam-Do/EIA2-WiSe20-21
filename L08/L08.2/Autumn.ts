@@ -86,7 +86,7 @@ namespace Autumn {
             drawTree(saturation, lightness);
             saturation += 0.7;
             lightness += -0.7;
-            scale += 0.017;
+            scale += 0.015;
             crc2.restore();
         } while (y < crc2.canvas.height - 100);
 
