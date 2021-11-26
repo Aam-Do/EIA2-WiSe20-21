@@ -31,20 +31,41 @@ var Autumn;
         drawMountains(mountainPos, mountainMin, mountainMax);
         drawGround();
         drawFog(fogPos);
-        drawTree();
+        drawTrees();
     }
     function calculateRandom(_min, _max) {
         let random = (Math.random() * (_max - _min)) + _min;
         return (random);
     }
-    function drawTree() {
+    function drawTrees() {
+        let y = horizon;
+        let stepMin = 10;
+        let stepMax = 15;
+        let scale = 0.1;
+        let saturation = 40;
+        let lightness = 60;
+        do {
+            y += stepMin + Math.random() * (stepMax - stepMin);
+            crc2.save();
+            let x = Math.random() * crc2.canvas.width;
+            crc2.translate(x, y);
+            crc2.scale(scale, scale);
+            drawTree(saturation, lightness);
+            saturation += 0.5;
+            lightness += -0.5;
+            scale += 0.05;
+            crc2.restore();
+        } while (y < crc2.canvas.height - 20);
+        crc2.restore();
+    }
+    function drawTree(_sat, _light) {
         console.log("Tree");
-        crc2.translate(200, 600);
+        console.log(_sat, _light);
         let nBranches = 50;
         let maxRadius = 60;
         let branch = new Path2D();
         branch.arc(0, 0, maxRadius, 0, 2 * Math.PI);
-        crc2.fillStyle = "brown";
+        crc2.fillStyle = "hsl(25, " + (_sat - 15) + "%, " + (_light - 25) + "%)";
         crc2.beginPath();
         crc2.moveTo(-30, 0);
         crc2.lineTo(-15, -300);
@@ -54,16 +75,25 @@ var Autumn;
         crc2.fill();
         crc2.save();
         crc2.translate(0, -250);
+        let theme = calculateRandom(0, 1);
         do {
-            let y = Math.random() * 250;
-            let size = 1 - y / 500;
-            let x = (Math.random() - 0.5) * 2 * maxRadius;
+            let y = Math.random() * 300;
+            let size = 1 - y / 600;
+            let x = (Math.random() - 0.5) * 250;
             crc2.save();
             crc2.translate(0, -y);
             crc2.scale(size, size);
             crc2.translate(x, 0);
-            let colorAngle = Math.random() * 68 + 2;
-            let color = "HSLA(" + colorAngle + ", 60%, 50%, 0.5)";
+            let hue;
+            let color;
+            if (theme > 0.3) {
+                hue = calculateRandom(0, 70);
+                color = "HSLA(" + hue + ", " + _sat + "%, " + _light + "%, 0.6)";
+            }
+            else {
+                hue = calculateRandom(50, 120);
+                color = "HSLA(" + hue + ", " + _sat + "%, " + (_light - 16) + "%, 0.6)";
+            }
             crc2.fillStyle = color;
             crc2.fill(branch);
             crc2.restore();
