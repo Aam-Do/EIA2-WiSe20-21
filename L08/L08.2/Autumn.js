@@ -31,31 +31,47 @@ var Autumn;
         drawMountains(mountainPos, mountainMin, mountainMax);
         drawGround();
         drawFog(fogPos);
-        drawTrees();
+        drawBackgroundTrees();
+        drawFrontTrees();
     }
     function calculateRandom(_min, _max) {
         let random = (Math.random() * (_max - _min)) + _min;
         return (random);
     }
-    function drawTrees() {
+    function drawFrontTrees() {
+        let scale = 1.2;
+        let saturation = 60;
+        let lightness = 50;
+        crc2.save();
+        crc2.translate(crc2.canvas.width * calculateRandom(0.1, 0.2), crc2.canvas.height - 20);
+        crc2.scale(scale, scale);
+        drawTree(saturation, lightness);
+        crc2.restore();
+        crc2.save();
+        crc2.translate(crc2.canvas.width * calculateRandom(0.8, 0.9), crc2.canvas.height - 20);
+        crc2.scale(scale, scale);
+        drawTree(saturation, lightness);
+        crc2.restore();
+    }
+    function drawBackgroundTrees() {
         let y = horizon;
-        let stepMin = 10;
-        let stepMax = 15;
+        let stepMin = 2;
+        let stepMax = 8;
         let scale = 0.1;
-        let saturation = 40;
-        let lightness = 60;
+        let saturation = 30;
+        let lightness = 70;
         do {
-            y += stepMin + Math.random() * (stepMax - stepMin);
+            y += calculateRandom(stepMin, stepMax);
             crc2.save();
-            let x = Math.random() * crc2.canvas.width;
+            let x = calculateRandom(0, crc2.canvas.width);
             crc2.translate(x, y);
             crc2.scale(scale, scale);
             drawTree(saturation, lightness);
-            saturation += 0.5;
-            lightness += -0.5;
-            scale += 0.05;
+            saturation += 0.7;
+            lightness += -0.7;
+            scale += 0.017;
             crc2.restore();
-        } while (y < crc2.canvas.height - 20);
+        } while (y < crc2.canvas.height - 100);
         crc2.restore();
     }
     function drawTree(_sat, _light) {
@@ -77,7 +93,7 @@ var Autumn;
         crc2.translate(0, -250);
         let theme = calculateRandom(0, 1);
         do {
-            let y = Math.random() * 300;
+            let y = calculateRandom(0, 300);
             let size = 1 - y / 600;
             let x = (Math.random() - 0.5) * 250;
             crc2.save();
@@ -177,7 +193,7 @@ var Autumn;
         crc2.fillStyle = gradient;
         crc2.globalCompositeOperation = "overlay";
         do {
-            x += stepMin + Math.random() * (stepMax - stepMin);
+            x += calculateRandom(stepMin, stepMax);
             let y = -10 - Math.random() * (20 - 10);
             crc2.save();
             crc2.translate(x, y);

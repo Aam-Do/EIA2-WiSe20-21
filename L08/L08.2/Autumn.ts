@@ -30,45 +30,65 @@ namespace Autumn {
     }
 
     function drawBackground(): void {
-        let sunPos: Vector = {x: calculateRandom(0, crc2.canvas.width), y: calculateRandom(150, horizon - 50)}
-        let mountainPos: Vector = {x: 0, y: horizon};
+        let sunPos: Vector = { x: calculateRandom(0, crc2.canvas.width), y: calculateRandom(150, horizon - 50) }
+        let mountainPos: Vector = { x: 0, y: horizon };
         let mountainMin: number = 50;
         let mountainMax: number = 200;
-        let fogPos: Vector = {x: 0, y: horizon};
+        let fogPos: Vector = { x: 0, y: horizon };
 
         drawSky();
         drawSun(sunPos);
         drawMountains(mountainPos, mountainMin, mountainMax);
         drawGround();
         drawFog(fogPos);
-        drawTrees();
+        drawBackgroundTrees();
+        drawFrontTrees();
     }
 
     function calculateRandom(_min: number, _max: number): number {
         let random: number = (Math.random() * (_max - _min)) + _min;
-        return(random);
+        return (random);
     }
 
-    function drawTrees(): void {
+    function drawFrontTrees(): void {
+        let scale: number = 1.2;
+        let saturation: number = 60;
+        let lightness: number = 50;
+
+        crc2.save();
+        crc2.translate(crc2.canvas.width * calculateRandom(0.1, 0.2), crc2.canvas.height - 20);
+        crc2.scale(scale, scale)
+        drawTree(saturation, lightness);
+        crc2.restore();
+
+        crc2.save();
+        crc2.translate(crc2.canvas.width * calculateRandom(0.8, 0.9), crc2.canvas.height - 20);
+        crc2.scale(scale, scale);
+        drawTree(saturation, lightness);
+        crc2.restore();
+
+    }
+
+    function drawBackgroundTrees(): void {
         let y: number = horizon;
-        let stepMin: number = 10;
-        let stepMax: number = 15;
+        let stepMin: number = 2;
+        let stepMax: number = 8;
         let scale: number = 0.1;
-        let saturation: number = 40;
-        let lightness: number = 60;
+        let saturation: number = 30;
+        let lightness: number = 70;
 
         do {
-            y += stepMin + Math.random() * (stepMax - stepMin);
+            y += calculateRandom(stepMin, stepMax);
             crc2.save();
-            let x: number = Math.random() * crc2.canvas.width;
+            let x: number = calculateRandom(0, crc2.canvas.width);
             crc2.translate(x, y);
             crc2.scale(scale, scale);
             drawTree(saturation, lightness);
-            saturation += 0.5;
-            lightness += -0.5;
-            scale += 0.05;
+            saturation += 0.7;
+            lightness += -0.7;
+            scale += 0.017;
             crc2.restore();
-        } while (y < crc2.canvas.height - 20);
+        } while (y < crc2.canvas.height - 100);
 
         crc2.restore();
     }
@@ -96,7 +116,7 @@ namespace Autumn {
         let theme: number = calculateRandom(0, 1);
 
         do {
-            let y: number = Math.random() * 300;
+            let y: number = calculateRandom(0, 300);
             let size: number = 1 - y / 600;
             let x: number = (Math.random() - 0.5) * 250;
 
@@ -105,7 +125,7 @@ namespace Autumn {
             crc2.scale(size, size);
             crc2.translate(x, 0);
 
-            
+
             let hue: number;
             let color: string;
 
@@ -116,7 +136,7 @@ namespace Autumn {
             else {
                 hue = calculateRandom(50, 120);
                 color = "HSLA(" + hue + ", " + _sat + "%, " + (_light - 16) + "%, 0.6)";
-                 
+
             }
 
             crc2.fillStyle = color;
@@ -232,8 +252,8 @@ namespace Autumn {
         crc2.globalCompositeOperation = "overlay";
 
         do {
-            x += stepMin + Math.random() * (stepMax - stepMin);
-            let y: number = - 10 - Math.random() * (20- 10);
+            x += calculateRandom(stepMin, stepMax);
+            let y: number = - 10 - Math.random() * (20 - 10);
             crc2.save();
             crc2.translate(x, y);
             crc2.fill(particle);
