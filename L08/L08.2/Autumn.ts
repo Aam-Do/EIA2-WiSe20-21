@@ -30,7 +30,7 @@ namespace Autumn {
     }
 
     function drawBackground(): void {
-        let sunPos: Vector = { x: calculateRandom(0, crc2.canvas.width), y: calculateRandom(150, horizon - 50) }
+        let sunPos: Vector = { x: calculateRandom(0, crc2.canvas.width), y: calculateRandom(150, horizon - 50) };
         let mountainPos: Vector = { x: 0, y: horizon };
         let mountainMin: number = 50;
         let mountainMax: number = 200;
@@ -164,13 +164,13 @@ namespace Autumn {
         let lightness: number = 50;
 
         crc2.save();
-        crc2.translate(crc2.canvas.width * calculateRandom(0.1, 0.2), crc2.canvas.height - 20);
-        crc2.scale(scale, scale)
+        crc2.translate(crc2.canvas.width * calculateRandom(0.01, 0.1), crc2.canvas.height - 25);
+        crc2.scale(scale, scale);
         drawTree(saturation, lightness);
         crc2.restore();
 
         crc2.save();
-        crc2.translate(crc2.canvas.width * calculateRandom(0.8, 0.9), crc2.canvas.height - 20);
+        crc2.translate(crc2.canvas.width * calculateRandom(0.9, 0.99), crc2.canvas.height - 25);
         crc2.scale(scale, scale);
         drawTree(saturation, lightness);
         crc2.restore();
@@ -196,7 +196,7 @@ namespace Autumn {
             lightness += -0.7;
             scale += 0.015;
             crc2.restore();
-        } while (y < crc2.canvas.height - 100);
+        } while (y < crc2.canvas.height - 110);
 
         crc2.restore();
     }
