@@ -142,12 +142,12 @@ var Autumn;
         let saturation = 60;
         let lightness = 50;
         crc2.save();
-        crc2.translate(crc2.canvas.width * calculateRandom(0.1, 0.2), crc2.canvas.height - 20);
+        crc2.translate(crc2.canvas.width * calculateRandom(0.01, 0.1), crc2.canvas.height - 25);
         crc2.scale(scale, scale);
         drawTree(saturation, lightness);
         crc2.restore();
         crc2.save();
-        crc2.translate(crc2.canvas.width * calculateRandom(0.8, 0.9), crc2.canvas.height - 20);
+        crc2.translate(crc2.canvas.width * calculateRandom(0.9, 0.99), crc2.canvas.height - 25);
         crc2.scale(scale, scale);
         drawTree(saturation, lightness);
         crc2.restore();
@@ -170,7 +170,7 @@ var Autumn;
             lightness += -0.7;
             scale += 0.015;
             crc2.restore();
-        } while (y < crc2.canvas.height - 100);
+        } while (y < crc2.canvas.height - 110);
         crc2.restore();
     }
     function drawTree(_sat, _light) {
