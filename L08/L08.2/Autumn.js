@@ -18,7 +18,7 @@ var Autumn;
         horizon = crc2.canvas.height * golden;
         drawBackground();
         // drawMiddleground();
-        // drawForeground();
+        drawForeground();
     }
     function drawBackground() {
         let sunPos = { x: calculateRandom(0, crc2.canvas.width), y: calculateRandom(150, horizon - 50) };
@@ -33,6 +33,105 @@ var Autumn;
         drawFog(fogPos);
         drawBackgroundTrees();
         drawFrontTrees();
+    }
+    function drawForeground() {
+        drawLeaves();
+    }
+    function drawLeaves() {
+        let nLeaves = calculateRandom(3, 15);
+        for (let i = 0; i < nLeaves; i++) {
+            let x = calculateRandom(0, crc2.canvas.width);
+            let y = calculateRandom(0, crc2.canvas.height);
+            crc2.save();
+            crc2.translate(x, y);
+            crc2.scale(calculateRandom(0.1, 0.6), calculateRandom(0.1, 0.6));
+            crc2.rotate(calculateRandom(0, 360));
+            let type = Math.round(calculateRandom(1, 3));
+            drawLeaf(type);
+            crc2.restore();
+        }
+    }
+    function drawLeaf(_type) {
+        crc2.beginPath();
+        crc2.moveTo(0, 0);
+        crc2.lineTo(-10, 100);
+        crc2.lineTo(10, 100);
+        crc2.closePath();
+        crc2.fillStyle = "hsl(25, 35%, 25%)";
+        crc2.fill();
+        let gradient = crc2.createLinearGradient(-150, 20, 150, -20);
+        gradient.addColorStop(0, "hsl(" + calculateRandom(0, 60) + ", 75%, 50%)");
+        gradient.addColorStop(1, "hsl(" + calculateRandom(50, 100) + ", 70%, 40%)");
+        crc2.fillStyle = gradient;
+        switch (_type) {
+            case 1:
+                drawMapleLeaf();
+                break;
+            case 2:
+                drawRoundLeaf();
+                break;
+            default:
+                drawPointyLeaf();
+        }
+    }
+    function drawPointyLeaf() {
+        crc2.beginPath();
+        crc2.moveTo(0, 5);
+        crc2.quadraticCurveTo(25, 25, 100, 25);
+        crc2.quadraticCurveTo(75, -25, 50, -25);
+        crc2.quadraticCurveTo(75, -50, 75, -125);
+        crc2.quadraticCurveTo(0, -100, 25, -75);
+        crc2.quadraticCurveTo(25, -125, 0, -200);
+        crc2.quadraticCurveTo(-25, -100, -25, -75);
+        crc2.quadraticCurveTo(0, -125, -75, -125);
+        crc2.quadraticCurveTo(-75, -50, -50, -25);
+        crc2.quadraticCurveTo(-75, -25, -100, 25);
+        crc2.quadraticCurveTo(-25, 25, 0, 5);
+        crc2.closePath();
+        crc2.fill();
+    }
+    function drawRoundLeaf() {
+        crc2.beginPath();
+        crc2.moveTo(0, 5);
+        crc2.bezierCurveTo(125, -50, 25, -150, 0, -200);
+        crc2.bezierCurveTo(-25, -150, -125, -50, 0, 5);
+        crc2.closePath();
+        crc2.fill();
+    }
+    function drawMapleLeaf() {
+        crc2.beginPath();
+        crc2.moveTo(0, 5);
+        crc2.lineTo(40, 50);
+        crc2.lineTo(50, 30);
+        crc2.lineTo(100, 50);
+        crc2.lineTo(90, 30);
+        crc2.lineTo(125, 20);
+        crc2.lineTo(50, -30);
+        crc2.lineTo(140, -50);
+        crc2.lineTo(125, -75);
+        crc2.lineTo(150, -100);
+        crc2.lineTo(100, -110);
+        crc2.lineTo(110, -125);
+        crc2.lineTo(40, -100);
+        crc2.lineTo(60, -165);
+        crc2.lineTo(30, -150);
+        crc2.lineTo(0, -200);
+        crc2.lineTo(-30, -150);
+        crc2.lineTo(-60, -165);
+        crc2.lineTo(-40, -100);
+        crc2.lineTo(-110, -125);
+        crc2.lineTo(-100, -110);
+        crc2.lineTo(-150, -100);
+        crc2.lineTo(-125, -75);
+        crc2.lineTo(-140, -50);
+        crc2.lineTo(-50, -30);
+        crc2.lineTo(-125, 20);
+        crc2.lineTo(-90, 30);
+        crc2.lineTo(-100, 50);
+        crc2.lineTo(-50, 30);
+        crc2.lineTo(-40, 50);
+        crc2.closePath();
+        crc2.fill();
     }
     function calculateRandom(_min, _max) {
         let random = (Math.random() * (_max - _min)) + _min;
@@ -75,8 +174,6 @@ var Autumn;
         crc2.restore();
     }
     function drawTree(_sat, _light) {
-        console.log("Tree");
-        console.log(_sat, _light);
         let nBranches = 50;
         let maxRadius = 60;
         let branch = new Path2D();
