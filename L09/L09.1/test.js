@@ -3,9 +3,9 @@ var Test;
 (function (Test) {
     debugger;
     class Vector {
-        x = 0;
-        y = 0;
         constructor(_x, _y) {
+            this.x = 0;
+            this.y = 0;
             this.set(_x, _y);
         }
         set(_x, _y) {
