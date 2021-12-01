@@ -7,13 +7,14 @@ body, html {
 body {
     background-image: url(../Style/background.jpg);
     background-size: cover;
+
 }
 #content {
     margin: auto;
     width: fit-content;
     height: 100%;
-    background: rgb(11,5,32);
-    background: linear-gradient(90deg, rgba(11,5,32,0) 0%, rgba(80, 34, 4, 0.86) 1%, rgba(80, 34, 4, 0.86) 99%, rgba(11,5,32,0) 100%);
+    background: rgb(151, 71, 17);
+    background: linear-gradient(90deg, rgba(151, 71, 17, 0) 0%, rgba(151, 71, 17, 0.753) 1%, rgba(151, 71, 17, 0.86) 99%, rgba(151, 71, 17, 0) 100%);
     padding: 0px 100px 0px 100px;
     text-align: center;
 }
