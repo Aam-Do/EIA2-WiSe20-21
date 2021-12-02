@@ -1,3 +1,11 @@
+/*
+Aufgabe: L09.1 Old MacDonald's Farm
+Name: Amélie Dell'Oro
+Matrikel: 268339
+Datum: 02.12.21
+Quellen: Ich selbst
+*/
+
 namespace Farm {
 
     window.addEventListener("DOMContentLoaded", hndLoad);
