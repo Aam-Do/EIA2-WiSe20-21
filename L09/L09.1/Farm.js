@@ -7,13 +7,12 @@ var Farm;
     let startButton;
     let nextButton;
     let foodStashes = {
-        nHay: 80,
-        nSeeds: 30,
-        nCarrots: 40,
-        nMeat: 60,
-        nFish: 50
+        hay: 80,
+        seeds: 30,
+        carrots: 40,
+        meat: 60,
+        fish: 50
     };
-    foodStashes.nH;
     function hndLoad() {
         startButton = document.querySelector("#start");
         startButton.addEventListener("pointerdown", hndStart);
@@ -25,6 +24,7 @@ var Farm;
         nextButton = document.createElement("button");
         // nextButton.addEventListener("pointerdown", hndNext);
         sideBar.appendChild(nextButton);
+        let cow = new Animal();
     }
 })(Farm || (Farm = {}));
 //# sourceMappingURL=Farm.js.map

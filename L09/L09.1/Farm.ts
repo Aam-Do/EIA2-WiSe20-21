@@ -7,15 +7,20 @@ namespace Farm {
     let startButton: HTMLButtonElement;
     let nextButton: HTMLButtonElement;
 
-    let foodStashes: object = {
-        nHay: 80,
-        nSeeds: 30,
-        nCarrots: 40,
-        nMeat: 60,
-        nFish: 50
+    interface Food {
+        hay: number;
+        seeds: number;
+        carrots: number;
+        meat: number;
+        fish: number;
+    }
+    let foodStashes: Food = {
+        hay: 80,
+        seeds: 30,
+        carrots: 40,
+        meat: 60,
+        fish: 50
     };
-
-    foodStashes.nH
 
     function hndLoad(): void {
         startButton = <HTMLButtonElement>document.querySelector("#start");
@@ -31,7 +36,7 @@ namespace Farm {
         // nextButton.addEventListener("pointerdown", hndNext);
         sideBar.appendChild(nextButton);
 
-
+        let cow: Animal = new Animal();
     }
 
 

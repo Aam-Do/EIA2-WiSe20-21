@@ -1,4 +1,3 @@
-namespace Farm {
 
     class Animal {
         name: string;
@@ -23,9 +22,9 @@ namespace Farm {
             _div.appendChild(song);
         }
 
-        eat(): void {
-            
+        eat(_side: HTMLDivElement, _stashes: Food): void {
+            let stock: HTMLSpanElement = document.createElement("span");
+            stock.innerHTML = this.food + ": " + 
         }
     }
 
-}
