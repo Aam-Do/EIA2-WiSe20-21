@@ -22,6 +22,11 @@ namespace AutumLeaves {
             this.y += _addend.y;
         }
 
+        copy(): Vector {
+            let copy: Vector = new Vector(this.x, this.y);
+            return(copy);
+        }
+
         random(_minLength: number, _maxLength: number, _minAngle: number = 0, _maxAngle: number = 2 * Math.PI): void {
             let length: number = _minLength + Math.random() * (_maxLength - _minLength);
             let direction: number = calculateRandom(_minAngle, _maxAngle);

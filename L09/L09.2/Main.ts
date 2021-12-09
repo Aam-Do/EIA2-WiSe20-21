@@ -1,8 +1,8 @@
 /*
-Aufgabe: L08.2 Goldener Herbst
+Aufgabe: L09.2 Goldener Herbst
 Name: Amélie Dell'Oro
 Matrikel: 268339
-Datum: 25.11.21
+Datum: 09.12.21
 Quellen: Prof. Jirka Dell'Oro-Friedls Repository
 */
 
@@ -12,7 +12,7 @@ namespace AutumLeaves {
     let golden: number = 0.62;
     let horizon: number;
     let background: ImageData;
-    let leaves: Leaf[];
+    let leaves: Leaf[] = [];
 
     export let crc2: CanvasRenderingContext2D;
 
@@ -21,7 +21,7 @@ namespace AutumLeaves {
         crc2 = canvas.getContext("2d")!;
         horizon = crc2.canvas.height * golden;
 
-        let nLeaves: number = calculateRandom(3, 15);
+        let nLeaves: number = calculateRandom(5, 15);
         for (let i: number = 0; i < nLeaves; i++) {
             let leaf: Leaf = new Leaf;
             leaves.push(leaf);
@@ -31,11 +31,11 @@ namespace AutumLeaves {
         drawBackground();
         background = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         // drawMiddleground();
-        drawForeground();
+        window.setInterval(update, 50);
     }
 
     function drawBackground(): void {
-        let sunPos: Vector = new Vector(calculateRandom(0, crc2.canvas.width), calculateRandom(150, horizon - 50));
+        let sunPos: Vector = new Vector(calculateRandom(crc2.canvas.width * 0.2, crc2.canvas.width * 0.8), calculateRandom(150, horizon - 100));
         let mountainPos: Vector = new Vector(0, horizon);
         let mountainMin: number = 50;
         let mountainMax: number = 200;
@@ -50,18 +50,17 @@ namespace AutumLeaves {
         drawFrontTrees();
     }
 
-    function drawForeground(): void {
+    function update(): void {
+        crc2.putImageData(background, 0, 0);
         drawLeaves();
     }
 
     function drawLeaves(): void {
-        // for (let i: number = 0; i < leaves.length; i++) {
-        //     let thisLeaf: Leaf = leaves[i];
-        //     thisLeaf.draw();
-        // }
+        for (let leaf of leaves) {
+            leaf.fall(1 / 50);
+            leaf.draw();
+        }
     }
-
-
 
     export function calculateRandom(_min: number, _max: number): number {
         let random: number = (Math.random() * (_max - _min)) + _min;

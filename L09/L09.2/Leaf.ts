@@ -9,16 +9,15 @@ namespace AutumLeaves {
         color: CanvasGradient;
 
         constructor() {
-            console.log("Leaf constructor");
             this.position = new Vector(calculateRandom(0, crc2.canvas.width), 0);
 
             this.velocity = new Vector(0, 0);
-            this.velocity.random(100, 200, 0, Math.PI / 2);
+            this.velocity.random(100, 400, Math.PI / 8, Math.PI / 3);
 
             this.type = Math.round(calculateRandom(1, 3));
             this.scale = new Vector(calculateRandom(0.1, 0.6), calculateRandom(0.1, 0.6));
             this.rotation = calculateRandom(0, 360);
-            this.rotationSpeed = calculateRandom(1, 360);
+            this.rotationSpeed = calculateRandom(-10, 10);
 
             this.color = crc2.createLinearGradient(-150, 20, 150, -20);
             this.color.addColorStop(0, "hsl(" + calculateRandom(0, 60) + ", 75%, 50%)");
@@ -26,7 +25,7 @@ namespace AutumLeaves {
         }
 
         fall(_timeslice: number): void {
-            let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
+            let offset: Vector = this.velocity.copy();
             offset.scale(_timeslice);
             this.position.add(offset);
 
@@ -36,16 +35,12 @@ namespace AutumLeaves {
                 this.position.y -= crc2.canvas.height;
 
             this.rotation += this.rotationSpeed * _timeslice;
-            if (this.rotation > 360)
-                this.rotation -= 360;
         }
 
         draw(): void {
-            console.log("Leaf draw");
             crc2.save();
             crc2.translate(this.position.x, this.position.y);
             crc2.scale(this.scale.x, this.scale.y);
-            crc2.translate(-50, -50);
             crc2.rotate(this.rotation);
             drawLeaf(this.type, this.color);
             crc2.restore();

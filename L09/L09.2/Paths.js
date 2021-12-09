@@ -81,5 +81,9 @@ var AutumLeaves;
         AutumLeaves.crc2.closePath();
         AutumLeaves.crc2.fill();
     }
+    // export function drawSquirrel(): void {
+    //     crc2.beginPath();
+    //     crc2.moveTo(0, 0);
+    // }
 })(AutumLeaves || (AutumLeaves = {}));
 //# sourceMappingURL=Paths.js.map

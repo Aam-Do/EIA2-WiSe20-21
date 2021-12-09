@@ -17,6 +17,10 @@ var AutumLeaves;
             this.x += _addend.x;
             this.y += _addend.y;
         }
+        copy() {
+            let copy = new Vector(this.x, this.y);
+            return (copy);
+        }
         random(_minLength, _maxLength, _minAngle = 0, _maxAngle = 2 * Math.PI) {
             let length = _minLength + Math.random() * (_maxLength - _minLength);
             let direction = AutumLeaves.calculateRandom(_minAngle, _maxAngle);

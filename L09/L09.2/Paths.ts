@@ -82,4 +82,10 @@ namespace AutumLeaves {
         crc2.closePath();
         crc2.fill();
     }
+
+    // export function drawSquirrel(): void {
+    //     crc2.beginPath();
+    //     crc2.moveTo(0, 0);
+
+    // }
 }
