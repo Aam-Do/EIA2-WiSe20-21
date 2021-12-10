@@ -2,9 +2,8 @@ namespace AutumLeaves {
     export class Squirrel {
         position: Vector;
 
-        constructor(_position: Vector) {
-            // this.position = new Vector(calculateRandom(crc2.canvas.width * 0.2, crc2.canvas.width * 0.8), calculateRandom(crc2.canvas.height - 25, crc2.canvas.height - 100));
-            this.position = new Vector(_position.x, _position.y);
+        constructor() {
+            this.position = new Vector(calculateRandom(crc2.canvas.width * 0.2, crc2.canvas.width * 0.8), calculateRandom(crc2.canvas.height - 25, crc2.canvas.height - 100));
         }
 
         draw(): void {

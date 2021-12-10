@@ -13,7 +13,7 @@ var AutumLeaves;
     let horizon;
     let background;
     let leaves = [];
-    let testSquirrel = new AutumLeaves.Squirrel(AutumLeaves.crc2.canvas.width / 2, 500);
+    let testSquirrel;
     function hndLoad(_event) {
         let canvas = document.querySelector("canvas");
         AutumLeaves.crc2 = canvas.getContext("2d");
@@ -22,10 +22,11 @@ var AutumLeaves;
         for (let i = 0; i < nLeaves; i++) {
             let leaf = new AutumLeaves.Leaf;
             leaves.push(leaf);
-            console.log(leaves);
         }
+        console.log(leaves);
         drawBackground();
-        // testSquirrel.draw();
+        testSquirrel = new AutumLeaves.Squirrel();
+        testSquirrel.draw();
         background = AutumLeaves.crc2.getImageData(0, 0, AutumLeaves.crc2.canvas.width, AutumLeaves.crc2.canvas.height);
         // drawMiddleground();
         window.setInterval(update, 50);
