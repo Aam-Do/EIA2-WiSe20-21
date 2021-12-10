@@ -27,19 +27,14 @@ namespace AutumLeaves {
             let leaf: Leaf = new Leaf;
             leaves.push(leaf);
         }
-        console.log(leaves);
 
         let nSquirrels: number = calculateRandom(1, 5);
         for (let i: number = 0; i < nSquirrels; i++) {
             let squirrel: Squirrel = new Squirrel;
             squirrels.push(squirrel);
         }
-        console.log(squirrels);
 
         drawBackground(); 
-        for (let squirrel of squirrels) {
-            squirrel.draw();
-        }
         background = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         // drawMiddleground();
         
@@ -64,7 +59,16 @@ namespace AutumLeaves {
 
     function update(): void {
         crc2.putImageData(background, 0, 0);
+        drawSquirrels();
         drawLeaves();
+    }
+
+    function drawSquirrels(): void {
+        squirrels.sort(function(a: Squirrel, b: Squirrel){return a.position.y - b.position.y; });
+        for (let squirrel of squirrels) {
+            squirrel.skate(1 / 50);
+            squirrel.draw();
+        }
     }
 
     function drawLeaves(): void {

@@ -23,17 +23,12 @@ var AutumLeaves;
             let leaf = new AutumLeaves.Leaf;
             leaves.push(leaf);
         }
-        console.log(leaves);
         let nSquirrels = calculateRandom(1, 5);
         for (let i = 0; i < nSquirrels; i++) {
             let squirrel = new AutumLeaves.Squirrel;
             squirrels.push(squirrel);
         }
-        console.log(squirrels);
         drawBackground();
-        for (let squirrel of squirrels) {
-            squirrel.draw();
-        }
         background = AutumLeaves.crc2.getImageData(0, 0, AutumLeaves.crc2.canvas.width, AutumLeaves.crc2.canvas.height);
         // drawMiddleground();
         window.setInterval(update, 50);
@@ -54,7 +49,15 @@ var AutumLeaves;
     }
     function update() {
         AutumLeaves.crc2.putImageData(background, 0, 0);
+        drawSquirrels();
         drawLeaves();
+    }
+    function drawSquirrels() {
+        squirrels.sort(function (a, b) { return a.position.y - b.position.y; });
+        for (let squirrel of squirrels) {
+            squirrel.skate(1 / 50);
+            squirrel.draw();
+        }
     }
     function drawLeaves() {
         for (let leaf of leaves) {
