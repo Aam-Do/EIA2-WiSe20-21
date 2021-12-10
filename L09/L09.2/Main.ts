@@ -64,7 +64,7 @@ namespace AutumLeaves {
     }
 
     function drawSquirrels(): void {
-        squirrels.sort(function(a: Squirrel, b: Squirrel){return a.position.y - b.position.y; });
+        squirrels.sort(function(_a: Squirrel, _b: Squirrel): number {return _a.position.y - _b.position.y; });
         for (let squirrel of squirrels) {
             squirrel.skate(1 / 50);
             squirrel.draw();
