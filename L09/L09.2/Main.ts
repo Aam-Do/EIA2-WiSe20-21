@@ -13,7 +13,7 @@ namespace AutumLeaves {
     let horizon: number;
     let background: ImageData;
     let leaves: Leaf[] = [];
-    let testSquirrel: Squirrel;
+    let squirrels: Squirrel[] = [];
 
     export let crc2: CanvasRenderingContext2D;
 
@@ -29,9 +29,17 @@ namespace AutumLeaves {
         }
         console.log(leaves);
 
+        let nSquirrels: number = calculateRandom(1, 5);
+        for (let i: number = 0; i < nSquirrels; i++) {
+            let squirrel: Squirrel = new Squirrel;
+            squirrels.push(squirrel);
+        }
+        console.log(squirrels);
+
         drawBackground(); 
-        testSquirrel = new Squirrel();
-        testSquirrel.draw();
+        for (let squirrel of squirrels) {
+            squirrel.draw();
+        }
         background = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         // drawMiddleground();
         
