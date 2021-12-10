@@ -13,6 +13,7 @@ namespace AutumLeaves {
     let horizon: number;
     let background: ImageData;
     let leaves: Leaf[] = [];
+    let testSquirrel: Squirrel = new Squirrel(crc2.canvas.width / 2, 500);
 
     export let crc2: CanvasRenderingContext2D;
 
@@ -29,8 +30,10 @@ namespace AutumLeaves {
         }
 
         drawBackground();
+        // testSquirrel.draw();
         background = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         // drawMiddleground();
+        
         window.setInterval(update, 50);
     }
 
