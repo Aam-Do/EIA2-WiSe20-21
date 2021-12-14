@@ -2,17 +2,6 @@
 var FarmHeritage;
 (function (FarmHeritage) {
     class Animal {
-        constructor(_name, _species, _type, _food, _sound, _hunger, _special) {
-            this.name = _name;
-            this.species = _species;
-            this.type = _type;
-            this.food = _food;
-            this.sound = _sound;
-            this.hunger = _hunger;
-            this.lyrics = `Old MacDonald had a farm, E-I-A-I-O, <br> And on his farm he had a ${this.species}, E-I-A-I-O, <br> With a ${this.sound}-${this.sound} here and a ${this.sound}-${this.sound} there, <br> Here a ${this.sound}, <br> there a ${this.sound}, <br> everywhere ${this.sound}-${this.sound}, <br> Old MacDonald had a farm, E-I-A-I-O.`;
-            this.isFed = true;
-            this.special = _special;
-        }
         sing() {
             let verse;
             if (this.isFed == true) {
