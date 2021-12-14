@@ -34,6 +34,16 @@ var FarmHeritage;
             }
             return (stash);
         }
+        doSpecialAction() {
+            let action;
+            if (this.isFed == true) {
+                action = "<b>" + this.name + "</b><br>" + this.special;
+            }
+            else {
+                action = "";
+            }
+            return (action);
+        }
     }
     FarmHeritage.Animal = Animal;
 })(FarmHeritage || (FarmHeritage = {}));

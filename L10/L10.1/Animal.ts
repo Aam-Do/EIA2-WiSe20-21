@@ -31,7 +31,6 @@ namespace FarmHeritage {
                 verse = "";
             }
             return (verse);
-
         }
 
         eat(_stashes: Food): string {
@@ -44,6 +43,17 @@ namespace FarmHeritage {
                 _stashes[this.food] -= this.hunger;
             }
             return (stash);
+        }
+
+        doSpecialAction(): string {
+            let action: string;
+            if (this.isFed == true) {
+                action = "<b>" + this.name + "</b><br>" + this.special;
+            }
+            else {
+                action = "";
+            }
+            return (action);
         }
     }
 }

@@ -10,7 +10,6 @@ namespace FarmHeritage {
             let special: string = "chased away the delivery man.";
             super(_name, species, type, food, sound, hunger, special);
         }
-
         
     }
 }
