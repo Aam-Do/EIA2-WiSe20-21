@@ -5,7 +5,7 @@ body, html {
     padding: 0;
 }
 body {
-    background-image: url(/EIA2-WiSe21-22/L10/L10.1/Style/background.jpg);
+    background-image: url(background.jpg);
     background-size: cover;
 
 }
