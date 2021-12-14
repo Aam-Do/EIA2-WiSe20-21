@@ -1,11 +1,13 @@
 namespace FarmHeritage {
     export class Dog extends Animal {
 
+        types: string[] = ["German Shepherd", "Welsh Corgi", "Jack-Russell Terrier", "Golden Retriever", "Toy Poodle"];
+
         constructor(_name: string) {
             super();
             this.name = _name;
             this.species = "dog";
-            this.type = "German Shepherd";
+            this.type = this.types[Math.round(Math.random() * 4)];
             this.food = "meat";
             this.sound = "woof";
             this.hunger = 8;

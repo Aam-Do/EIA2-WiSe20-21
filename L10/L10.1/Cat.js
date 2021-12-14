@@ -4,9 +4,10 @@ var FarmHeritage;
     class Cat extends FarmHeritage.Animal {
         constructor(_name) {
             super();
+            this.types = ["Maine Coon", "Birman", "Bengal", "American Shorthair", "Sphynx"];
             this.name = _name;
             this.species = "cat";
-            this.type = "Ragdoll";
+            this.type = this.types[Math.round(Math.random() * 4)];
             this.food = "fish";
             this.sound = "meow";
             this.hunger = 5;
