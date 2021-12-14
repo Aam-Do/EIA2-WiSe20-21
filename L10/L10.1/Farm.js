@@ -1,9 +1,9 @@
 "use strict";
 /*
-Aufgabe: L09.1 Old MacDonald's Farm
+Aufgabe: L10.1 Old MacDonald's Farm Heritage
 Name: Amélie Dell'Oro
 Matrikel: 268339
-Datum: 02.12.21
+Datum: 14.12.21
 Quellen: Ich selbst
 */
 var FarmHeritage;
@@ -15,11 +15,11 @@ var FarmHeritage;
     let nextButton;
     let allAnimals = [new FarmHeritage.Cow("Queen Elizabeth XVII"), new FarmHeritage.Dog("Cerberus"), new FarmHeritage.Cat("Sir Maximus Prime"), new FarmHeritage.Duck("Lord Kingston"), new FarmHeritage.Pig("Bulldozer")];
     let foodStashes = {
-        hay: 65,
-        seeds: 30,
-        carrots: 55,
-        meat: 45,
-        fish: 35
+        hay: 74,
+        seeds: 33,
+        carrots: 68,
+        meat: 52,
+        fish: 46
     };
     function hndLoad() {
         startButton = document.querySelector("#start");
@@ -43,17 +43,19 @@ var FarmHeritage;
     }
     function endDay() {
         for (let i = 0; i < allAnimals.length; i++) {
-            let song = document.createElement("p");
-            song.innerHTML = allAnimals[i].sing();
-            container.appendChild(song);
             let stock = document.createElement("span");
             stock.innerHTML = allAnimals[i].eat(foodStashes);
             sideBar.appendChild(stock);
+            let song = document.createElement("p");
+            song.innerHTML = allAnimals[i].sing();
+            if (song.innerHTML != "")
+                container.appendChild(song);
         }
         for (let i = 0; i < allAnimals.length; i++) {
             let specialActions = document.createElement("span");
             specialActions.innerHTML = allAnimals[i].doSpecialAction();
-            sideBar.appendChild(specialActions);
+            if (specialActions.innerHTML != "")
+                sideBar.appendChild(specialActions);
         }
     }
     function hndNext() {

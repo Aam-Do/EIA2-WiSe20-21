@@ -22,7 +22,6 @@ namespace FarmHeritage {
         }
 
         eat(_stashes: Food): string {
-            let stash: string = this.food + ": " + _stashes[this.food] + "kg";
             if (_stashes[this.food] - this.hunger < 0) {
                 _stashes[this.food] = 0;
                 this.isFed = false;
@@ -30,6 +29,7 @@ namespace FarmHeritage {
             else {
                 _stashes[this.food] -= this.hunger;
             }
+            let stash: string = this.food + ": " + _stashes[this.food] + "kg";
             return (stash);
         }
 
@@ -39,7 +39,7 @@ namespace FarmHeritage {
                 action = "<b>" + this.name + "</b><br>" + this.special;
             }
             else {
-                action = "";
+                action = "<b>" + this.name + "</b><br>starved to death.";
             }
             return (action);
         }

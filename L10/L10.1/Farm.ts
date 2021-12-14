@@ -1,8 +1,8 @@
 /*
-Aufgabe: L09.1 Old MacDonald's Farm
+Aufgabe: L10.1 Old MacDonald's Farm Heritage
 Name: Amélie Dell'Oro
 Matrikel: 268339
-Datum: 02.12.21
+Datum: 14.12.21
 Quellen: Ich selbst
 */
 
@@ -21,11 +21,11 @@ namespace FarmHeritage {
         [key: string]: number;
     }
     let foodStashes: Food = {
-        hay: 65,
-        seeds: 30,
-        carrots: 55,
-        meat: 45,
-        fish: 35
+        hay: 74,
+        seeds: 33,
+        carrots: 68,
+        meat: 52,
+        fish: 46
     };
 
     function hndLoad(): void {
@@ -58,18 +58,20 @@ namespace FarmHeritage {
 
     function endDay(): void {
         for (let i: number = 0; i < allAnimals.length; i++) {
-            let song: HTMLParagraphElement = document.createElement("p");
-            song.innerHTML = allAnimals[i].sing();
-            container.appendChild(song);
-
             let stock: HTMLSpanElement = document.createElement("span");
             stock.innerHTML = allAnimals[i].eat(foodStashes);
             sideBar.appendChild(stock);
+
+            let song: HTMLParagraphElement = document.createElement("p");
+            song.innerHTML = allAnimals[i].sing();
+            if (song.innerHTML != "")
+                container.appendChild(song);
         }
         for (let i: number = 0; i < allAnimals.length; i++) {
             let specialActions: HTMLSpanElement = document.createElement("span");
             specialActions.innerHTML = allAnimals[i].doSpecialAction();
-            sideBar.appendChild(specialActions);
+            if (specialActions.innerHTML != "")
+                sideBar.appendChild(specialActions);
         }
     }
 

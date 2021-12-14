@@ -13,7 +13,6 @@ var FarmHeritage;
             return (verse);
         }
         eat(_stashes) {
-            let stash = this.food + ": " + _stashes[this.food] + "kg";
             if (_stashes[this.food] - this.hunger < 0) {
                 _stashes[this.food] = 0;
                 this.isFed = false;
@@ -21,6 +20,7 @@ var FarmHeritage;
             else {
                 _stashes[this.food] -= this.hunger;
             }
+            let stash = this.food + ": " + _stashes[this.food] + "kg";
             return (stash);
         }
         doSpecialAction() {
@@ -29,7 +29,7 @@ var FarmHeritage;
                 action = "<b>" + this.name + "</b><br>" + this.special;
             }
             else {
-                action = "";
+                action = "<b>" + this.name + "</b><br>starved to death.";
             }
             return (action);
         }
