@@ -17,8 +17,6 @@ namespace FarmHeritage {
 
     let allAnimals: Animal[] = [new Cow("Queen Elizabeth XVII"), new Dog("Cerberus"), new Cat("Sir Maximus Prime"), new Duck("Lord Kingston"), new Pig("Bulldozer")];
 
-    // let dog: Dog = new Dog("Cerberus");
-
     export interface Food {
         [key: string]: number;
     }
@@ -56,7 +54,6 @@ namespace FarmHeritage {
         body.appendChild(sideBar);
 
         endDay();
-
     }
 
     function endDay(): void {
@@ -74,14 +71,6 @@ namespace FarmHeritage {
             specialActions.innerHTML = allAnimals[i].doSpecialAction();
             sideBar.appendChild(specialActions);
         }
-
-        // let song: HTMLParagraphElement = document.createElement("p");
-        // song.innerHTML = dog.sing();
-        // container.appendChild(song);
-        // let stock: HTMLSpanElement = document.createElement("span");
-        // stock.innerHTML = dog.eat(foodStashes);
-        // sideBar.appendChild(stock);
-
     }
 
     function hndNext(): void {

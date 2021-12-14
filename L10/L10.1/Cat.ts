@@ -1,6 +1,5 @@
 namespace FarmHeritage {
     export class Cat extends Animal {
-
         types: string[] = ["Maine Coon", "Birman", "Bengal", "American Shorthair", "Sphynx"];
 
         constructor(_name: string) {
@@ -15,6 +14,5 @@ namespace FarmHeritage {
             this.special = "caught a mouse.";
             this.isFed = true;
         }
-        
     }
 }

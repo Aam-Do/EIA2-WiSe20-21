@@ -1,6 +1,5 @@
 namespace FarmHeritage {
     export class Dog extends Animal {
-
         types: string[] = ["German Shepherd", "Welsh Corgi", "Jack-Russell Terrier", "Golden Retriever", "Toy Poodle"];
 
         constructor(_name: string) {
@@ -15,6 +14,5 @@ namespace FarmHeritage {
             this.special = "chased away the mailman.";
             this.isFed = true;
         }
-
     }
 }

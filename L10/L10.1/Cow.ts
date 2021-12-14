@@ -1,6 +1,5 @@
 namespace FarmHeritage {
     export class Cow extends Animal {
-
         types: string[] = ["Belted Galloway", "Charolais", "Dexter", "Hereford", "Scottish Highland"];
 
         constructor(_name: string) {
@@ -15,6 +14,5 @@ namespace FarmHeritage {
             this.special = "produced " + Math.round((Math.random() * 45) + 5) + "l Milk.";
             this.isFed = true;
         }
-        
     }
 }

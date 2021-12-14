@@ -1,6 +1,5 @@
 namespace FarmHeritage {
     export class Pig extends Animal {
-
         types: string[] = ["Tamworth", "Hereford", "Hampshire", "Duroc", "Angeln Saddleback"];
 
         constructor(_name: string) {
@@ -15,6 +14,5 @@ namespace FarmHeritage {
             this.special = "took a nice mudbath.";
             this.isFed = true;
         }
-        
     }
 }

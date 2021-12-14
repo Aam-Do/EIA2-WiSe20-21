@@ -55,12 +55,6 @@ var FarmHeritage;
             specialActions.innerHTML = allAnimals[i].doSpecialAction();
             sideBar.appendChild(specialActions);
         }
-        // let song: HTMLParagraphElement = document.createElement("p");
-        // song.innerHTML = dog.sing();
-        // container.appendChild(song);
-        // let stock: HTMLSpanElement = document.createElement("span");
-        // stock.innerHTML = dog.eat(foodStashes);
-        // sideBar.appendChild(stock);
     }
     function hndNext() {
         container.innerHTML = "";

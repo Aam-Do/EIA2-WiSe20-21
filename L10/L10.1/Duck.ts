@@ -1,6 +1,5 @@
 namespace FarmHeritage {
     export class Duck extends Animal {
-
         types: string[] = ["Northern Pintail", "King Eider", "Barrow's Goldeneye", "Ruddy Duck", "Velvet Scoter"];
 
         constructor(_name: string) {
@@ -15,6 +14,5 @@ namespace FarmHeritage {
             this.special = "bit the neighbor.";
             this.isFed = true;
         }
-        
     }
 }
