@@ -13,12 +13,13 @@ var FarmHeritage;
     let sideBar;
     let startButton;
     let nextButton;
-    let cow = new FarmHeritage.Animal("Queen Elizabeth XVII", "cow", "hay", "moo", 15);
-    let dog = new FarmHeritage.Animal("Cerberus", "dog", "meat", "woof", 8);
-    let cat = new FarmHeritage.Animal("Sir Maximus Prime", "cat", "fish", "meow", 5);
-    let duck = new FarmHeritage.Animal("Lord Kingston", "duck", "seeds", "quack", 3);
-    let pig = new FarmHeritage.Animal("Bulldozer", "pig", "carrots", "oink", 9);
-    let allAnimals = [cow, dog, cat, duck, pig];
+    // let cow: Animal = new Animal("Queen Elizabeth XVII", "cow", "hay", "moo", 15);
+    // let dog: Animal = new Animal("Cerberus", "dog", "meat", "woof", 8);
+    // let cat: Animal = new Animal("Sir Maximus Prime", "cat", "fish", "meow", 5);
+    // let duck: Animal = new Animal("Lord Kingston", "duck", "seeds", "quack", 3);
+    // let pig: Animal = new Animal("Bulldozer", "pig", "carrots", "oink", 9);
+    // let allAnimals: Animal[] = [cow, dog, cat, duck, pig];
+    let dog = new FarmHeritage.Dog("Cerberus");
     let foodStashes = {
         hay: 65,
         seeds: 30,
@@ -47,14 +48,20 @@ var FarmHeritage;
         endDay();
     }
     function endDay() {
-        for (let i = 0; i < allAnimals.length; i++) {
-            let song = document.createElement("p");
-            song.innerHTML = allAnimals[i].sing();
-            container.appendChild(song);
-            let stock = document.createElement("span");
-            stock.innerHTML = allAnimals[i].eat(foodStashes);
-            sideBar.appendChild(stock);
-        }
+        // for (let i: number = 0; i < allAnimals.length; i++) {
+        //     let song: HTMLParagraphElement = document.createElement("p");
+        //     song.innerHTML = allAnimals[i].sing();
+        //     container.appendChild(song);
+        //     let stock: HTMLSpanElement = document.createElement("span");
+        //     stock.innerHTML = allAnimals[i].eat(foodStashes);
+        //     sideBar.appendChild(stock);
+        // }
+        let song = document.createElement("p");
+        song.innerHTML = dog.sing();
+        container.appendChild(song);
+        let stock = document.createElement("span");
+        stock.innerHTML = dog.eat(foodStashes);
+        sideBar.appendChild(stock);
     }
     function hndNext() {
         container.innerHTML = "";

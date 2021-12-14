@@ -15,12 +15,14 @@ namespace FarmHeritage {
     let startButton: HTMLButtonElement;
     let nextButton: HTMLButtonElement;
 
-    let cow: Animal = new Animal("Queen Elizabeth XVII", "cow", "hay", "moo", 15);
-    let dog: Animal = new Animal("Cerberus", "dog", "meat", "woof", 8);
-    let cat: Animal = new Animal("Sir Maximus Prime", "cat", "fish", "meow", 5);
-    let duck: Animal = new Animal("Lord Kingston", "duck", "seeds", "quack", 3);
-    let pig: Animal = new Animal("Bulldozer", "pig", "carrots", "oink", 9);
-    let allAnimals: Animal[] = [cow, dog, cat, duck, pig];
+    // let cow: Animal = new Animal("Queen Elizabeth XVII", "cow", "hay", "moo", 15);
+    // let dog: Animal = new Animal("Cerberus", "dog", "meat", "woof", 8);
+    // let cat: Animal = new Animal("Sir Maximus Prime", "cat", "fish", "meow", 5);
+    // let duck: Animal = new Animal("Lord Kingston", "duck", "seeds", "quack", 3);
+    // let pig: Animal = new Animal("Bulldozer", "pig", "carrots", "oink", 9);
+    // let allAnimals: Animal[] = [cow, dog, cat, duck, pig];
+
+    let dog: Dog = new Dog("Cerberus");
 
     export interface Food {
         [key: string]: number;
@@ -63,15 +65,22 @@ namespace FarmHeritage {
     }
 
     function endDay(): void {
-        for (let i: number = 0; i < allAnimals.length; i++) {
-            let song: HTMLParagraphElement = document.createElement("p");
-            song.innerHTML = allAnimals[i].sing();
-            container.appendChild(song);
+        // for (let i: number = 0; i < allAnimals.length; i++) {
+        //     let song: HTMLParagraphElement = document.createElement("p");
+        //     song.innerHTML = allAnimals[i].sing();
+        //     container.appendChild(song);
 
-            let stock: HTMLSpanElement = document.createElement("span");
-            stock.innerHTML = allAnimals[i].eat(foodStashes);
-            sideBar.appendChild(stock);
-        }
+        //     let stock: HTMLSpanElement = document.createElement("span");
+        //     stock.innerHTML = allAnimals[i].eat(foodStashes);
+        //     sideBar.appendChild(stock);
+        // }
+        let song: HTMLParagraphElement = document.createElement("p");
+        song.innerHTML = dog.sing();
+        container.appendChild(song);
+        let stock: HTMLSpanElement = document.createElement("span");
+        stock.innerHTML = dog.eat(foodStashes);
+        sideBar.appendChild(stock);
+
     }
 
     function hndNext(): void {
