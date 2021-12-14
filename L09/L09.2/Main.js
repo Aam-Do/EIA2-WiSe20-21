@@ -53,7 +53,7 @@ var AutumLeaves;
         drawLeaves();
     }
     function drawSquirrels() {
-        squirrels.sort(function (a, b) { return a.position.y - b.position.y; });
+        squirrels.sort(function (_a, _b) { return _a.position.y - _b.position.y; });
         for (let squirrel of squirrels) {
             squirrel.skate(1 / 50);
             squirrel.draw();
