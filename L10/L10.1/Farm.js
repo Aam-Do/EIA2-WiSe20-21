@@ -54,8 +54,7 @@ var FarmHeritage;
         for (let i = 0; i < allAnimals.length; i++) {
             let specialActions = document.createElement("span");
             specialActions.innerHTML = allAnimals[i].doSpecialAction();
-            if (specialActions.innerHTML != "")
-                sideBar.appendChild(specialActions);
+            sideBar.appendChild(specialActions);
         }
     }
     function hndNext() {

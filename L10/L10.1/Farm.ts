@@ -70,8 +70,7 @@ namespace FarmHeritage {
         for (let i: number = 0; i < allAnimals.length; i++) {
             let specialActions: HTMLSpanElement = document.createElement("span");
             specialActions.innerHTML = allAnimals[i].doSpecialAction();
-            if (specialActions.innerHTML != "")
-                sideBar.appendChild(specialActions);
+            sideBar.appendChild(specialActions);
         }
     }
 
