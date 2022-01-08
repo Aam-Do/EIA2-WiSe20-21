@@ -30,7 +30,6 @@ var AutumLeaves;
         }
         drawBackground();
         background = AutumLeaves.crc2.getImageData(0, 0, AutumLeaves.crc2.canvas.width, AutumLeaves.crc2.canvas.height);
-        // drawMiddleground();
         window.setInterval(update, 50);
     }
     function drawBackground() {

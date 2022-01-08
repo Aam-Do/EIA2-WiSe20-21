@@ -34,7 +34,6 @@ var AutumLeaves;
         draw() {
             AutumLeaves.crc2.save();
             AutumLeaves.crc2.translate(this.position.x, this.position.y);
-            // crc2.scale(0.1, 0.1);
             let scale = new AutumLeaves.Vector((0.1 * this.size) + (this.position.y - 600) / 1000, (0.1 * this.size) + (this.position.y - 600) / 1000);
             AutumLeaves.crc2.scale(scale.x, scale.y);
             if (this.facing == "right")

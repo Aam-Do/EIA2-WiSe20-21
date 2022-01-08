@@ -1,12 +1,12 @@
 /*
-Aufgabe: L09.2 Goldener Herbst
+Aufgabe: L10.2 Goldener Herbst
 Name: Amélie Dell'Oro
 Matrikel: 268339
-Datum: 09.12.21
-Quellen: Prof. Jirka Dell'Oro-Friedls Repository
+Datum: 08.01.22
+Quellen: ich selbst
 */
 
-namespace AutumLeaves {
+namespace AutumnMoveables {
 
     window.addEventListener("load", hndLoad);
     let golden: number = 0.62;

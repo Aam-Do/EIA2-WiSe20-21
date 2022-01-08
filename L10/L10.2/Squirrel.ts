@@ -1,4 +1,4 @@
-namespace AutumLeaves {
+namespace AutumnMoveables {
     export class Squirrel {
         position: Vector;
         facing: string;
