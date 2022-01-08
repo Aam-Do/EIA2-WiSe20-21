@@ -9,11 +9,12 @@ Quellen: ich selbst
 namespace AutumnMoveables {
 
     window.addEventListener("load", hndLoad);
+
     let golden: number = 0.62;
     let horizon: number;
     let background: ImageData;
-    let leaves: Leaf[] = [];
-    let squirrels: Squirrel[] = [];
+    let moveables: Moveable[] = [];
+    let nSquirrels: number = calculateRandom(1, 5);
 
     export let crc2: CanvasRenderingContext2D;
 
@@ -22,16 +23,15 @@ namespace AutumnMoveables {
         crc2 = canvas.getContext("2d")!;
         horizon = crc2.canvas.height * golden;
 
+        for (let i: number = 0; i < nSquirrels; i++) {
+            let squirrel: Squirrel = new Squirrel;
+            moveables.push(squirrel);
+        }
+
         let nLeaves: number = calculateRandom(5, 15);
         for (let i: number = 0; i < nLeaves; i++) {
             let leaf: Leaf = new Leaf;
-            leaves.push(leaf);
-        }
-
-        let nSquirrels: number = calculateRandom(1, 5);
-        for (let i: number = 0; i < nSquirrels; i++) {
-            let squirrel: Squirrel = new Squirrel;
-            squirrels.push(squirrel);
+            moveables.push(leaf);
         }
 
         drawBackground(); 
@@ -58,23 +58,16 @@ namespace AutumnMoveables {
 
     function update(): void {
         crc2.putImageData(background, 0, 0);
-        drawSquirrels();
-        drawLeaves();
-    }
 
-    function drawSquirrels(): void {
-        squirrels.sort(function(_a: Squirrel, _b: Squirrel): number {return _a.position.y - _b.position.y; });
-        
+        let squirrels: Moveable[] = moveables.splice(0, nSquirrels + 1);
+        squirrels.sort(function(_a: Moveable, _b: Moveable): number {return _b.position.y - _a.position.y; });
         for (let squirrel of squirrels) {
-            squirrel.skate(1 / 50);
-            squirrel.draw();
+            moveables.unshift(squirrel);
         }
-    }
 
-    function drawLeaves(): void {
-        for (let leaf of leaves) {
-            leaf.fall(1 / 50);
-            leaf.draw();
+        for (let moveable of moveables) {
+            moveable.move(1 / 50);
+            moveable.draw();
         }
     }
 

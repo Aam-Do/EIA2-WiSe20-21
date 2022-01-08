@@ -1,7 +1,5 @@
 namespace AutumnMoveables {
-    export class Leaf {
-        position: Vector;
-        velocity: Vector;
+    export class Leaf extends Moveable {
         type: number;
         scale: Vector;
         rotation: number;
@@ -9,9 +7,7 @@ namespace AutumnMoveables {
         color: CanvasGradient;
 
         constructor() {
-            this.position = new Vector(calculateRandom(0, crc2.canvas.width), 0);
-
-            this.velocity = new Vector(0, 0);
+            super(new Vector(calculateRandom(0, crc2.canvas.width), 0));
             this.velocity.random(100, 400, Math.PI / 8, Math.PI / 3);
 
             this.type = Math.round(calculateRandom(1, 3));
@@ -24,10 +20,8 @@ namespace AutumnMoveables {
             this.color.addColorStop(1, "hsl(" + calculateRandom(50, 100) + ", 70%, 40%)");
         }
 
-        fall(_timeslice: number): void {
-            let offset: Vector = this.velocity.copy();
-            offset.scale(_timeslice);
-            this.position.add(offset);
+        move(_timeslice: number): void {
+            super.move(_timeslice);
 
             if (this.position.x > crc2.canvas.width)
                 this.position.x -= crc2.canvas.width;

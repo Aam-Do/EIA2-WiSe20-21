@@ -1,17 +1,14 @@
 "use strict";
 var AutumnMoveables;
 (function (AutumnMoveables) {
-    class Squirrel {
+    class Squirrel extends AutumnMoveables.Moveable {
         constructor() {
-            this.position = new AutumnMoveables.Vector(AutumnMoveables.calculateRandom(AutumnMoveables.crc2.canvas.width * 0.15, AutumnMoveables.crc2.canvas.width * 0.75), AutumnMoveables.calculateRandom(AutumnMoveables.crc2.canvas.height - 20, AutumnMoveables.crc2.canvas.height - 100));
-            this.velocity = new AutumnMoveables.Vector(0, 0);
+            super(new AutumnMoveables.Vector(AutumnMoveables.calculateRandom(AutumnMoveables.crc2.canvas.width * 0.15, AutumnMoveables.crc2.canvas.width * 0.75), AutumnMoveables.calculateRandom(AutumnMoveables.crc2.canvas.height - 20, AutumnMoveables.crc2.canvas.height - 100)));
             this.velocity.random(50, 120);
             this.size = AutumnMoveables.calculateRandom(0.9, 1.3);
         }
-        skate(_timeslice) {
-            let offset = this.velocity.copy();
-            offset.scale(_timeslice);
-            this.position.add(offset);
+        move(_timeslice) {
+            super.move(_timeslice);
             if (this.position.x > AutumnMoveables.crc2.canvas.width * 0.75) {
                 this.velocity.random(50, 120, Math.PI / 2, (3 * Math.PI) / 2);
             }

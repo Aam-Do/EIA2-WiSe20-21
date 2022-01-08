@@ -12,21 +12,20 @@ var AutumnMoveables;
     let golden = 0.62;
     let horizon;
     let background;
-    let leaves = [];
-    let squirrels = [];
+    let moveables = [];
+    let nSquirrels = calculateRandom(1, 5);
     function hndLoad(_event) {
         let canvas = document.querySelector("canvas");
         AutumnMoveables.crc2 = canvas.getContext("2d");
         horizon = AutumnMoveables.crc2.canvas.height * golden;
+        for (let i = 0; i < nSquirrels; i++) {
+            let squirrel = new AutumnMoveables.Squirrel;
+            moveables.push(squirrel);
+        }
         let nLeaves = calculateRandom(5, 15);
         for (let i = 0; i < nLeaves; i++) {
             let leaf = new AutumnMoveables.Leaf;
-            leaves.push(leaf);
-        }
-        let nSquirrels = calculateRandom(1, 5);
-        for (let i = 0; i < nSquirrels; i++) {
-            let squirrel = new AutumnMoveables.Squirrel;
-            squirrels.push(squirrel);
+            moveables.push(leaf);
         }
         drawBackground();
         background = AutumnMoveables.crc2.getImageData(0, 0, AutumnMoveables.crc2.canvas.width, AutumnMoveables.crc2.canvas.height);
@@ -48,20 +47,14 @@ var AutumnMoveables;
     }
     function update() {
         AutumnMoveables.crc2.putImageData(background, 0, 0);
-        drawSquirrels();
-        drawLeaves();
-    }
-    function drawSquirrels() {
-        squirrels.sort(function (_a, _b) { return _a.position.y - _b.position.y; });
+        let squirrels = moveables.splice(0, nSquirrels + 1);
+        squirrels.sort(function (_a, _b) { return _b.position.y - _a.position.y; });
         for (let squirrel of squirrels) {
-            squirrel.skate(1 / 50);
-            squirrel.draw();
+            moveables.unshift(squirrel);
         }
-    }
-    function drawLeaves() {
-        for (let leaf of leaves) {
-            leaf.fall(1 / 50);
-            leaf.draw();
+        for (let moveable of moveables) {
+            moveable.move(1 / 50);
+            moveable.draw();
         }
     }
     function calculateRandom(_min, _max) {

@@ -1,10 +1,9 @@
 "use strict";
 var AutumnMoveables;
 (function (AutumnMoveables) {
-    class Leaf {
+    class Leaf extends AutumnMoveables.Moveable {
         constructor() {
-            this.position = new AutumnMoveables.Vector(AutumnMoveables.calculateRandom(0, AutumnMoveables.crc2.canvas.width), 0);
-            this.velocity = new AutumnMoveables.Vector(0, 0);
+            super(new AutumnMoveables.Vector(AutumnMoveables.calculateRandom(0, AutumnMoveables.crc2.canvas.width), 0));
             this.velocity.random(100, 400, Math.PI / 8, Math.PI / 3);
             this.type = Math.round(AutumnMoveables.calculateRandom(1, 3));
             this.scale = new AutumnMoveables.Vector(AutumnMoveables.calculateRandom(0.1, 0.6), AutumnMoveables.calculateRandom(0.1, 0.6));
@@ -14,10 +13,8 @@ var AutumnMoveables;
             this.color.addColorStop(0, "hsl(" + AutumnMoveables.calculateRandom(0, 60) + ", 75%, 50%)");
             this.color.addColorStop(1, "hsl(" + AutumnMoveables.calculateRandom(50, 100) + ", 70%, 40%)");
         }
-        fall(_timeslice) {
-            let offset = this.velocity.copy();
-            offset.scale(_timeslice);
-            this.position.add(offset);
+        move(_timeslice) {
+            super.move(_timeslice);
             if (this.position.x > AutumnMoveables.crc2.canvas.width)
                 this.position.x -= AutumnMoveables.crc2.canvas.width;
             if (this.position.y > AutumnMoveables.crc2.canvas.height)

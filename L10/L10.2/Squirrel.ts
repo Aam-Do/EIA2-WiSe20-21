@@ -1,22 +1,17 @@
 namespace AutumnMoveables {
-    export class Squirrel {
-        position: Vector;
+    export class Squirrel extends Moveable {
         facing: string;
         size: number;
-        velocity: Vector;
         
         constructor() {
-            this.position = new Vector(calculateRandom(crc2.canvas.width * 0.15, crc2.canvas.width * 0.75), calculateRandom(crc2.canvas.height - 20, crc2.canvas.height - 100));
-            this.velocity = new Vector(0, 0);
+            super(new Vector(calculateRandom(crc2.canvas.width * 0.15, crc2.canvas.width * 0.75), calculateRandom(crc2.canvas.height - 20, crc2.canvas.height - 100)));
             this.velocity.random(50, 120);
 
             this.size = calculateRandom(0.9, 1.3);
         }
 
-        skate(_timeslice: number): void {
-            let offset: Vector = this.velocity.copy();
-            offset.scale(_timeslice);
-            this.position.add(offset);
+        move(_timeslice: number): void {
+            super.move(_timeslice);
 
             if (this.position.x > crc2.canvas.width * 0.75) {
                 this.velocity.random(50, 120, Math.PI / 2, (3 * Math.PI) / 2);
