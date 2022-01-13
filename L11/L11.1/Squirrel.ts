@@ -11,7 +11,7 @@ namespace AutumnNuts {
             this.size = calculateRandom(0.9, 1.3);
         }
 
-        move(_timeslice: number): void {
+        public move(_timeslice: number): void {
             super.move(_timeslice);
 
             if (this.position.x > crc2.canvas.width * 0.75) {
@@ -35,7 +35,7 @@ namespace AutumnNuts {
             }
         }
 
-        draw(): void {
+        public draw(): void {
             crc2.save();
             crc2.translate(this.position.x, this.position.y);
             let scale: Vector = new Vector((0.1 * this.size) + (this.position.y - 600) / 1000, (0.1  * this.size) + (this.position.y - 600) / 1000);

@@ -8,7 +8,7 @@ namespace AutumnNuts {
             this.velocity = new Vector (0, 0);
         }
 
-        move(_timeslice: number): void {
+        public move(_timeslice: number): void {
             let offset: Vector = this.velocity.copy();
             offset.scale(_timeslice);
             this.position.add(offset);

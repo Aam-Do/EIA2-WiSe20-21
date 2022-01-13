@@ -20,7 +20,7 @@ namespace AutumnNuts {
             this.color.addColorStop(1, "hsl(" + calculateRandom(50, 100) + ", 70%, 40%)");
         }
 
-        move(_timeslice: number): void {
+        public move(_timeslice: number): void {
             super.move(_timeslice);
 
             if (this.position.x > crc2.canvas.width)
@@ -31,7 +31,7 @@ namespace AutumnNuts {
             this.rotation += this.rotationSpeed * _timeslice;
         }
 
-        draw(): void {
+        public draw(): void {
             crc2.save();
             crc2.translate(this.position.x, this.position.y);
             crc2.scale(this.scale.x, this.scale.y);
