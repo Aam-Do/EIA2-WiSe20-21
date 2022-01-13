@@ -16,6 +16,7 @@ var AutumnNuts;
     let nSquirrels = calculateRandom(1, 5);
     function hndLoad(_event) {
         let canvas = document.querySelector("canvas");
+        canvas.addEventListener("pointerdown", hndClick);
         AutumnNuts.crc2 = canvas.getContext("2d");
         horizon = AutumnNuts.crc2.canvas.height * golden;
         for (let i = 0; i < nSquirrels; i++) {
@@ -30,6 +31,18 @@ var AutumnNuts;
         drawBackground();
         background = AutumnNuts.crc2.getImageData(0, 0, AutumnNuts.crc2.canvas.width, AutumnNuts.crc2.canvas.height);
         window.setInterval(update, 50);
+    }
+    function hndClick(_event) {
+        let target = _event.target;
+        let rect = target.getBoundingClientRect();
+        let scaling = new AutumnNuts.Vector(AutumnNuts.crc2.canvas.height / rect.height, AutumnNuts.crc2.canvas.width / rect.width);
+        let pointer = new AutumnNuts.Vector((_event.clientX - rect.left) * scaling.x, (_event.clientY - rect.top) * scaling.x);
+        if (pointer.x > AutumnNuts.crc2.canvas.width * 0.75 || pointer.y > AutumnNuts.crc2.canvas.height - 20 || pointer.x < AutumnNuts.crc2.canvas.width * 0.15 || pointer.y < AutumnNuts.crc2.canvas.height - 100) {
+            console.log("You have to click inside the squirrel area!");
+        }
+        else {
+            console.log("You placed a nut!");
+        }
     }
     function drawBackground() {
         let sunPos = new AutumnNuts.Vector(calculateRandom(AutumnNuts.crc2.canvas.width * 0.2, AutumnNuts.crc2.canvas.width * 0.8), calculateRandom(150, horizon - 100));

@@ -20,6 +20,9 @@ namespace AutumnNuts {
 
     function hndLoad(_event: Event): void {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
+
+        canvas.addEventListener("pointerdown", hndClick);
+
         crc2 = canvas.getContext("2d")!;
         horizon = crc2.canvas.height * golden;
 
@@ -34,10 +37,26 @@ namespace AutumnNuts {
             moveables.push(leaf);
         }
 
-        drawBackground(); 
+        drawBackground();
         background = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
-        
+
         window.setInterval(update, 50);
+    }
+
+    function hndClick(_event: PointerEvent) {
+
+        let target: HTMLElement = <HTMLElement>_event.target;
+        let rect: DOMRect = target.getBoundingClientRect();
+        let scaling: Vector = new Vector(crc2.canvas.height / rect.height, crc2.canvas.width / rect.width);
+        let pointer: Vector = new Vector((_event.clientX - rect.left) * scaling.x, (_event.clientY - rect.top) * scaling.x);
+
+        if (pointer.x  > crc2.canvas.width * 0.75 || pointer.y > crc2.canvas.height - 20 || pointer.x < crc2.canvas.width * 0.15 || pointer.y < crc2.canvas.height - 100) {
+            console.log("You have to click inside the squirrel area!");
+        }
+        else {
+            console.log("You placed a nut!");
+        }
+
     }
 
     function drawBackground(): void {
@@ -60,7 +79,7 @@ namespace AutumnNuts {
         crc2.putImageData(background, 0, 0);
 
         let squirrels: Moveable[] = moveables.splice(0, nSquirrels + 1);
-        squirrels.sort(function(_a: Moveable, _b: Moveable): number {return _b.position.y - _a.position.y; });
+        squirrels.sort(function (_a: Moveable, _b: Moveable): number { return _b.position.y - _a.position.y; });
         for (let squirrel of squirrels) {
             moveables.unshift(squirrel);
         }
