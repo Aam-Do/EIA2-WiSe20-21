@@ -3,7 +3,7 @@ namespace AutumnNuts {
         private facing: string;
         private size: number;
         private target: Nut;
-        
+
         constructor() {
             super(new Vector(calculateRandom(crc2.canvas.width * 0.15, crc2.canvas.width * 0.75), calculateRandom(crc2.canvas.height - 20, crc2.canvas.height - 100)));
             this.velocity.random(50, 120);
@@ -23,7 +23,7 @@ namespace AutumnNuts {
             else if (this.position.x < crc2.canvas.width * 0.15) {
                 this.velocity.random(50, 120, 0, Math.PI / 2);
             }
-            else if (this.position.y < crc2.canvas.height - 100) {  
+            else if (this.position.y < crc2.canvas.height - 100) {
                 this.velocity.random(50, 120, 0, Math.PI);
             }
 
@@ -32,6 +32,12 @@ namespace AutumnNuts {
             }
             else {
                 this.facing = "left";
+            }
+
+            if (this.target) {
+                if (this.velocity.length() * _timeslice > new Vector(this.target.position.x - this.position.x, this.target.position.y - this.position.y).length()) {
+                    this.velocity.set(0, 0);
+                }
             }
         }
 
@@ -44,6 +50,27 @@ namespace AutumnNuts {
                 crc2.scale(-1, 1);
             drawSquirrel();
             crc2.restore();
+        }
+
+        public search(_array: Moveable[]): void {
+            let nut: Nut | undefined = undefined;
+            let distance: number = Infinity;
+            for (let thing of _array) {
+                if (thing instanceof Nut == true) {
+                    let thisNut: Nut = <Nut>thing;
+                    let thisDistance: number = new Vector(this.position.x - thisNut.position.x, this.position.y - thisNut.position.y).length();
+                    if (thisDistance < distance) {
+                        distance = thisDistance;
+                        nut = thisNut;
+                    }
+                }
+            }
+            if (nut) {
+                this.velocity.set(nut.position.x - this.position.x, nut.position.y - this.position.y);
+                this.velocity.scale(calculateRandom(0.2, 1.3));
+                this.target = nut;
+            }
+            console.log(nut);
         }
     }
 }

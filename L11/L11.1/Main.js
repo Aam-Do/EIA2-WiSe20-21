@@ -17,6 +17,7 @@ var AutumnNuts;
     function hndLoad(_event) {
         let canvas = document.querySelector("canvas");
         canvas.addEventListener("pointerdown", hndClick);
+        // canvas.addEventListener("eat", hndEat);
         AutumnNuts.crc2 = canvas.getContext("2d");
         horizon = AutumnNuts.crc2.canvas.height * golden;
         let nSquirrels = calculateRandom(1, 5);
@@ -33,6 +34,11 @@ var AutumnNuts;
         background = AutumnNuts.crc2.getImageData(0, 0, AutumnNuts.crc2.canvas.width, AutumnNuts.crc2.canvas.height);
         window.setInterval(update, 50);
     }
+    // function hndEat(_event: CustomEvent): void {
+    //     let nut: Nut = <Nut>_event.target;
+    //     let index: number = actives.indexOf(nut);
+    //     actives.splice(index, 1);
+    // }
     function hndClick(_event) {
         let target = _event.target;
         let rect = target.getBoundingClientRect();
@@ -44,6 +50,13 @@ var AutumnNuts;
         else {
             console.log("You placed a nut!");
             actives.unshift(new AutumnNuts.Nut(pointer));
+            let squirrel;
+            for (let active of actives) {
+                if (active instanceof AutumnNuts.Squirrel == true) {
+                    squirrel = active;
+                    squirrel.search(actives);
+                }
+            }
         }
     }
     function drawBackground() {

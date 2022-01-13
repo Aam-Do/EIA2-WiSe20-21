@@ -27,6 +27,11 @@ var AutumnNuts;
             else {
                 this.facing = "left";
             }
+            if (this.target) {
+                if (this.velocity.length() * _timeslice > new AutumnNuts.Vector(this.target.position.x - this.position.x, this.target.position.y - this.position.y).length()) {
+                    this.velocity.set(0, 0);
+                }
+            }
         }
         draw() {
             AutumnNuts.crc2.save();
@@ -37,6 +42,26 @@ var AutumnNuts;
                 AutumnNuts.crc2.scale(-1, 1);
             AutumnNuts.drawSquirrel();
             AutumnNuts.crc2.restore();
+        }
+        search(_array) {
+            let nut = undefined;
+            let distance = Infinity;
+            for (let thing of _array) {
+                if (thing instanceof AutumnNuts.Nut == true) {
+                    let thisNut = thing;
+                    let thisDistance = new AutumnNuts.Vector(this.position.x - thisNut.position.x, this.position.y - thisNut.position.y).length();
+                    if (thisDistance < distance) {
+                        distance = thisDistance;
+                        nut = thisNut;
+                    }
+                }
+            }
+            if (nut) {
+                this.velocity.set(nut.position.x - this.position.x, nut.position.y - this.position.y);
+                this.velocity.scale(AutumnNuts.calculateRandom(0.2, 1.3));
+                this.target = nut;
+            }
+            console.log(nut);
         }
     }
     AutumnNuts.Squirrel = Squirrel;
