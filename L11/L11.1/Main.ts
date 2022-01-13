@@ -43,7 +43,7 @@ namespace AutumnNuts {
         window.setInterval(update, 50);
     }
 
-    function hndClick(_event: PointerEvent) {
+    function hndClick(_event: PointerEvent): void {
 
         let target: HTMLElement = <HTMLElement>_event.target;
         let rect: DOMRect = target.getBoundingClientRect();

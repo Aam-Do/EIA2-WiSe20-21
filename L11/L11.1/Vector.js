@@ -21,6 +21,10 @@ var AutumnNuts;
             let copy = new Vector(this.x, this.y);
             return (copy);
         }
+        length() {
+            let length = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+            return (length);
+        }
         random(_minLength, _maxLength, _minAngle = 0, _maxAngle = 2 * Math.PI) {
             let length = _minLength + Math.random() * (_maxLength - _minLength);
             let direction = AutumnNuts.calculateRandom(_minAngle, _maxAngle);

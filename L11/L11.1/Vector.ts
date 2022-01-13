@@ -27,6 +27,11 @@ namespace AutumnNuts {
             return(copy);
         }
 
+        public length(): number {
+            let length: number = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+            return(length);
+        }
+
         public random(_minLength: number, _maxLength: number, _minAngle: number = 0, _maxAngle: number = 2 * Math.PI): void {
             let length: number = _minLength + Math.random() * (_maxLength - _minLength);
             let direction: number = calculateRandom(_minAngle, _maxAngle);
