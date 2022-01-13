@@ -3,7 +3,7 @@ var AutumnNuts;
 (function (AutumnNuts) {
     function drawNut() {
         AutumnNuts.crc2.fillStyle = "brown";
-        AutumnNuts.crc2.fillRect(-.025, -.05, .05, .05);
+        AutumnNuts.crc2.fillRect(-150, -300, 300, 300);
     }
     AutumnNuts.drawNut = drawNut;
     function drawLeaf(_type, _gradient) {

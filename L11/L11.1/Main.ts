@@ -13,8 +13,9 @@ namespace AutumnNuts {
     let golden: number = 0.62;
     let horizon: number;
     let background: ImageData;
-    let moveables: Moveable[] = [];
-    let nSquirrels: number = calculateRandom(1, 5);
+    let actives: Moveable[] = [];
+    let passives: Leaf[] = [];
+
 
     export let crc2: CanvasRenderingContext2D;
 
@@ -26,15 +27,16 @@ namespace AutumnNuts {
         crc2 = canvas.getContext("2d")!;
         horizon = crc2.canvas.height * golden;
 
+        let nSquirrels: number = calculateRandom(1, 5);
         for (let i: number = 0; i < nSquirrels; i++) {
             let squirrel: Squirrel = new Squirrel;
-            moveables.push(squirrel);
+            actives.push(squirrel);
         }
 
         let nLeaves: number = calculateRandom(5, 15);
         for (let i: number = 0; i < nLeaves; i++) {
             let leaf: Leaf = new Leaf;
-            moveables.push(leaf);
+            passives.push(leaf);
         }
 
         drawBackground();
@@ -50,12 +52,12 @@ namespace AutumnNuts {
         let scaling: Vector = new Vector(crc2.canvas.height / rect.height, crc2.canvas.width / rect.width);
         let pointer: Vector = new Vector((_event.clientX - rect.left) * scaling.x, (_event.clientY - rect.top) * scaling.x);
 
-        if (pointer.x  > crc2.canvas.width * 0.75 || pointer.y > crc2.canvas.height - 20 || pointer.x < crc2.canvas.width * 0.15 || pointer.y < crc2.canvas.height - 100) {
+        if (pointer.x > crc2.canvas.width * 0.75 || pointer.y > crc2.canvas.height - 20 || pointer.x < crc2.canvas.width * 0.15 || pointer.y < crc2.canvas.height - 100) {
             console.log("You have to click inside the squirrel area!");
         }
         else {
             console.log("You placed a nut!");
-            moveables.unshift(new Nut(pointer));
+            actives.unshift(new Nut(pointer));
         }
 
     }
@@ -79,15 +81,16 @@ namespace AutumnNuts {
     function update(): void {
         crc2.putImageData(background, 0, 0);
 
-        // let squirrels: Moveable[] = moveables.splice(0, nSquirrels + 1);
-        // squirrels.sort(function (_a: Moveable, _b: Moveable): number { return _b.position.y - _a.position.y; });
-        // for (let squirrel of squirrels) {
-        //     moveables.unshift(squirrel);
-        // }
+        actives.sort(function (_a: Moveable, _b: Moveable): number { return _a.position.y - _b.position.y; });
+    
+        for (let active of actives) {
+           active.move(1 / 50);
+           active.draw();
+        }
 
-        for (let moveable of moveables) {
-            moveable.move(1 / 50);
-            moveable.draw();
+        for (let passive of passives) {
+           passive.move(1 / 50);
+           passive.draw();
         }
     }
 

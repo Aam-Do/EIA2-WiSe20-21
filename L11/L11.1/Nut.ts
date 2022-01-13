@@ -8,8 +8,8 @@ namespace AutumnNuts {
         public draw(): void {
             crc2.save();
             crc2.translate(this.position.x, this.position.y);
-            let scale: Vector = new Vector(this.position.y - 600 / 1000, this.position.y - 600 / 1000);
-            crc2.scale(scale.x, scale.y);
+            let scale: number = (0.1 * 1) + (this.position.y - 600) / 1000;
+            crc2.scale(scale, scale);
             drawNut();
             crc2.restore();
         }

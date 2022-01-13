@@ -8,8 +8,8 @@ var AutumnNuts;
         draw() {
             AutumnNuts.crc2.save();
             AutumnNuts.crc2.translate(this.position.x, this.position.y);
-            let scale = new AutumnNuts.Vector(this.position.y - 600 / 1000, this.position.y - 600 / 1000);
-            AutumnNuts.crc2.scale(scale.x, scale.y);
+            let scale = (0.1 * 1) + (this.position.y - 600) / 1000;
+            AutumnNuts.crc2.scale(scale, scale);
             AutumnNuts.drawNut();
             AutumnNuts.crc2.restore();
         }

@@ -1,7 +1,7 @@
 namespace AutumnNuts {
     export function drawNut(): void {
         crc2.fillStyle = "brown";
-        crc2.fillRect(-.025, -.05, .05, .05);
+        crc2.fillRect(-150, -300, 300, 300);
     }
 
     export function drawLeaf(_type: number, _gradient: CanvasGradient): void {

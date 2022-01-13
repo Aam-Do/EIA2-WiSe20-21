@@ -38,8 +38,8 @@ namespace AutumnNuts {
         public draw(): void {
             crc2.save();
             crc2.translate(this.position.x, this.position.y);
-            let scale: Vector = new Vector((0.1 * this.size) + (this.position.y - 600) / 1000, (0.1  * this.size) + (this.position.y - 600) / 1000);
-            crc2.scale(scale.x, scale.y);
+            let scale: number = (0.1 * this.size) + (this.position.y - 600) / 1000;
+            crc2.scale(scale, scale);
             if (this.facing == "right")
                 crc2.scale(-1, 1);
             drawSquirrel();

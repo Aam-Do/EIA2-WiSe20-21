@@ -12,21 +12,22 @@ var AutumnNuts;
     let golden = 0.62;
     let horizon;
     let background;
-    let moveables = [];
-    let nSquirrels = calculateRandom(1, 5);
+    let actives = [];
+    let passives = [];
     function hndLoad(_event) {
         let canvas = document.querySelector("canvas");
         canvas.addEventListener("pointerdown", hndClick);
         AutumnNuts.crc2 = canvas.getContext("2d");
         horizon = AutumnNuts.crc2.canvas.height * golden;
+        let nSquirrels = calculateRandom(1, 5);
         for (let i = 0; i < nSquirrels; i++) {
             let squirrel = new AutumnNuts.Squirrel;
-            moveables.push(squirrel);
+            actives.push(squirrel);
         }
         let nLeaves = calculateRandom(5, 15);
         for (let i = 0; i < nLeaves; i++) {
             let leaf = new AutumnNuts.Leaf;
-            moveables.push(leaf);
+            passives.push(leaf);
         }
         drawBackground();
         background = AutumnNuts.crc2.getImageData(0, 0, AutumnNuts.crc2.canvas.width, AutumnNuts.crc2.canvas.height);
@@ -42,7 +43,7 @@ var AutumnNuts;
         }
         else {
             console.log("You placed a nut!");
-            moveables.unshift(new AutumnNuts.Nut(pointer));
+            actives.unshift(new AutumnNuts.Nut(pointer));
         }
     }
     function drawBackground() {
@@ -61,14 +62,14 @@ var AutumnNuts;
     }
     function update() {
         AutumnNuts.crc2.putImageData(background, 0, 0);
-        // let squirrels: Moveable[] = moveables.splice(0, nSquirrels + 1);
-        // squirrels.sort(function (_a: Moveable, _b: Moveable): number { return _b.position.y - _a.position.y; });
-        // for (let squirrel of squirrels) {
-        //     moveables.unshift(squirrel);
-        // }
-        for (let moveable of moveables) {
-            moveable.move(1 / 50);
-            moveable.draw();
+        actives.sort(function (_a, _b) { return _a.position.y - _b.position.y; });
+        for (let active of actives) {
+            active.move(1 / 50);
+            active.draw();
+        }
+        for (let passive of passives) {
+            passive.move(1 / 50);
+            passive.draw();
         }
     }
     function calculateRandom(_min, _max) {

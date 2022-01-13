@@ -31,8 +31,8 @@ var AutumnNuts;
         draw() {
             AutumnNuts.crc2.save();
             AutumnNuts.crc2.translate(this.position.x, this.position.y);
-            let scale = new AutumnNuts.Vector((0.1 * this.size) + (this.position.y - 600) / 1000, (0.1 * this.size) + (this.position.y - 600) / 1000);
-            AutumnNuts.crc2.scale(scale.x, scale.y);
+            let scale = (0.1 * this.size) + (this.position.y - 600) / 1000;
+            AutumnNuts.crc2.scale(scale, scale);
             if (this.facing == "right")
                 AutumnNuts.crc2.scale(-1, 1);
             AutumnNuts.drawSquirrel();
