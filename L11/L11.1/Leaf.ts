@@ -1,10 +1,10 @@
 namespace AutumnNuts {
     export class Leaf extends Moveable {
-        type: number;
-        scale: Vector;
-        rotation: number;
-        rotationSpeed: number;
-        color: CanvasGradient;
+        private type: number;
+        private scale: Vector;
+        private rotation: number;
+        private rotationSpeed: number;
+        private color: CanvasGradient;
 
         constructor() {
             super(new Vector(calculateRandom(0, crc2.canvas.width), 0));

@@ -1,9 +1,9 @@
 namespace AutumnNuts {
     export abstract class Moveable {
-        position: Vector;
-        velocity: Vector;
+        public position: Vector;
+        protected velocity: Vector;
 
-        constructor(_position: Vector) {
+        protected constructor(_position: Vector) {
             this.position = _position;
             this.velocity = new Vector (0, 0);
         }

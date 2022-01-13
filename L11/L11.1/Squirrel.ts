@@ -1,7 +1,8 @@
 namespace AutumnNuts {
     export class Squirrel extends Moveable {
-        facing: string;
-        size: number;
+        public isHunting: boolean;
+        private facing: string;
+        private size: number;
         
         constructor() {
             super(new Vector(calculateRandom(crc2.canvas.width * 0.15, crc2.canvas.width * 0.75), calculateRandom(crc2.canvas.height - 20, crc2.canvas.height - 100)));
