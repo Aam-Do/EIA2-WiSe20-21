@@ -42,6 +42,7 @@ var AutumnNuts;
         }
         else {
             console.log("You placed a nut!");
+            moveables.unshift(new AutumnNuts.Nut(pointer));
         }
     }
     function drawBackground() {
@@ -60,11 +61,11 @@ var AutumnNuts;
     }
     function update() {
         AutumnNuts.crc2.putImageData(background, 0, 0);
-        let squirrels = moveables.splice(0, nSquirrels + 1);
-        squirrels.sort(function (_a, _b) { return _b.position.y - _a.position.y; });
-        for (let squirrel of squirrels) {
-            moveables.unshift(squirrel);
-        }
+        // let squirrels: Moveable[] = moveables.splice(0, nSquirrels + 1);
+        // squirrels.sort(function (_a: Moveable, _b: Moveable): number { return _b.position.y - _a.position.y; });
+        // for (let squirrel of squirrels) {
+        //     moveables.unshift(squirrel);
+        // }
         for (let moveable of moveables) {
             moveable.move(1 / 50);
             moveable.draw();

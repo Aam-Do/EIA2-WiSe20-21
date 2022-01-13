@@ -1,4 +1,9 @@
 namespace AutumnNuts {
+    export function drawNut(): void {
+        crc2.fillStyle = "brown";
+        crc2.fillRect(-.025, -.05, .05, .05);
+    }
+
     export function drawLeaf(_type: number, _gradient: CanvasGradient): void {
         crc2.beginPath();
         crc2.moveTo(0, 0);
@@ -83,13 +88,7 @@ namespace AutumnNuts {
         crc2.fill();
     }
 
-    export function prepareSquirrel(): void {
-        
-        drawSquirrel();
-
-    }
-
-    function drawSquirrel(): void {
+    export function drawSquirrel(): void {
 
         crc2.beginPath();
         crc2.fillStyle = "rgb(172, 125, 73)";

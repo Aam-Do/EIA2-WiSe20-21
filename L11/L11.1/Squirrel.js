@@ -35,7 +35,7 @@ var AutumnNuts;
             AutumnNuts.crc2.scale(scale.x, scale.y);
             if (this.facing == "right")
                 AutumnNuts.crc2.scale(-1, 1);
-            AutumnNuts.prepareSquirrel();
+            AutumnNuts.drawSquirrel();
             AutumnNuts.crc2.restore();
         }
     }

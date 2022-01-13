@@ -1,6 +1,11 @@
 "use strict";
 var AutumnNuts;
 (function (AutumnNuts) {
+    function drawNut() {
+        AutumnNuts.crc2.fillStyle = "brown";
+        AutumnNuts.crc2.fillRect(-.025, -.05, .05, .05);
+    }
+    AutumnNuts.drawNut = drawNut;
     function drawLeaf(_type, _gradient) {
         AutumnNuts.crc2.beginPath();
         AutumnNuts.crc2.moveTo(0, 0);
@@ -81,10 +86,6 @@ var AutumnNuts;
         AutumnNuts.crc2.closePath();
         AutumnNuts.crc2.fill();
     }
-    function prepareSquirrel() {
-        drawSquirrel();
-    }
-    AutumnNuts.prepareSquirrel = prepareSquirrel;
     function drawSquirrel() {
         AutumnNuts.crc2.beginPath();
         AutumnNuts.crc2.fillStyle = "rgb(172, 125, 73)";
@@ -323,5 +324,6 @@ var AutumnNuts;
         AutumnNuts.crc2.moveTo(-248.559800, -685.737840);
         AutumnNuts.crc2.stroke();
     }
+    AutumnNuts.drawSquirrel = drawSquirrel;
 })(AutumnNuts || (AutumnNuts = {}));
 //# sourceMappingURL=Paths.js.map
