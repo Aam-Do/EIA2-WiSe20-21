@@ -17,7 +17,7 @@ var AutumnNuts;
     function hndLoad(_event) {
         let canvas = document.querySelector("canvas");
         canvas.addEventListener("pointerdown", hndClick);
-        document.addEventListener("eat", hndEat);
+        canvas.addEventListener("eat", hndEat);
         AutumnNuts.crc2 = canvas.getContext("2d");
         horizon = AutumnNuts.crc2.canvas.height * golden;
         let nSquirrels = calculateRandom(1, 5);

@@ -23,7 +23,7 @@ namespace AutumnNuts {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
 
         canvas.addEventListener("pointerdown", hndClick);
-        document.addEventListener("eat", hndEat);
+        canvas.addEventListener("eat", hndEat);
 
         crc2 = canvas.getContext("2d")!;
         horizon = crc2.canvas.height * golden;
@@ -46,8 +46,8 @@ namespace AutumnNuts {
         window.setInterval(update, 50);
     }
 
-    function hndEat(_event: CustomEvent): void {
-        let nut: Nut = _event.detail.nut;
+    function hndEat(_event: Event): void {
+        let nut: Nut = (<CustomEvent>_event).detail.nut;
         let index: number = actives.indexOf(nut);
         actives.splice(index, 1);
 

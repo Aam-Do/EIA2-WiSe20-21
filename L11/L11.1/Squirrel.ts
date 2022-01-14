@@ -7,9 +7,9 @@ namespace AutumnNuts {
 
         constructor() {
             super(new Vector(calculateRandom(crc2.canvas.width * 0.15, crc2.canvas.width * 0.75), calculateRandom(crc2.canvas.height - 20, crc2.canvas.height - 100)));
-            this.velocity.random(50, 120);
+            this.velocity.random(20, 80);
 
-            this.size = calculateRandom(0.9, 1.3);
+            this.size = calculateRandom(0.9, 1.2);
             this.isEating = false;
         }
 
@@ -76,12 +76,12 @@ namespace AutumnNuts {
                     if (nut != this.target) {
                         let distance: Vector = new Vector(nut.position.x - this.position.x, nut.position.y - this.position.y);
                         this.velocity.set(distance.x, distance.y);
-                        this.velocity.scale((100 / distance.length()) * calculateRandom(.3, 1.5));
+                        this.velocity.scale((100 / distance.length()) * calculateRandom(1, 3));
                         this.target = nut;
                     }
                 }
                 else {
-                    this.velocity.random(50, 120);
+                    this.velocity.random(20, 80);
                 }
             }
         }
@@ -91,7 +91,7 @@ namespace AutumnNuts {
             let nutEvent: CustomEvent = new CustomEvent("eat", { bubbles: true, detail: { nut: this.target } });
             crc2.canvas.dispatchEvent(nutEvent);
             this.target = undefined;
-            setTimeout(this.swallow, 3000);
+            setTimeout(this.swallow.bind(this), 3000);
         }
 
         private swallow(): void {
