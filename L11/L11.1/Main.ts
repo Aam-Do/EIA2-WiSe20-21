@@ -13,7 +13,7 @@ namespace AutumnNuts {
     let golden: number = 0.62;
     let horizon: number;
     let background: ImageData;
-    let actives: Moveable[] = [];
+    export let actives: Moveable[] = [];
     let passives: Leaf[] = [];
 
 
@@ -23,7 +23,7 @@ namespace AutumnNuts {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
 
         canvas.addEventListener("pointerdown", hndClick);
-        // canvas.addEventListener("eat", hndEat);
+        document.addEventListener("eat", hndEat);
 
         crc2 = canvas.getContext("2d")!;
         horizon = crc2.canvas.height * golden;
@@ -46,11 +46,23 @@ namespace AutumnNuts {
         window.setInterval(update, 50);
     }
 
-    // function hndEat(_event: CustomEvent): void {
-    //     let nut: Nut = <Nut>_event.target;
-    //     let index: number = actives.indexOf(nut);
-    //     actives.splice(index, 1);
-    // }
+    function hndEat(_event: CustomEvent): void {
+        let nut: Nut = _event.detail.nut;
+        let index: number = actives.indexOf(nut);
+        actives.splice(index, 1);
+
+        squirrelsSearch();
+    }
+
+    function squirrelsSearch(): void {
+        let squirrel: Squirrel;
+        for (let active of actives) {
+            if (active instanceof Squirrel == true) {
+                squirrel = <Squirrel>active;
+                squirrel.search();
+            }
+        }
+    }
 
     function hndClick(_event: PointerEvent): void {
 
@@ -65,16 +77,8 @@ namespace AutumnNuts {
         else {
             console.log("You placed a nut!");
             actives.unshift(new Nut(pointer));
-            let squirrel: Squirrel;
-            for (let active of actives) {
-                if (active instanceof Squirrel == true) {
-                    squirrel = <Squirrel>active;
-                    squirrel.search(actives);
-                }
-            }
+            squirrelsSearch();
         }
-
-
     }
 
     function drawBackground(): void {

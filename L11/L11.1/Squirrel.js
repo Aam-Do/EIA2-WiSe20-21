@@ -6,6 +6,7 @@ var AutumnNuts;
             super(new AutumnNuts.Vector(AutumnNuts.calculateRandom(AutumnNuts.crc2.canvas.width * 0.15, AutumnNuts.crc2.canvas.width * 0.75), AutumnNuts.calculateRandom(AutumnNuts.crc2.canvas.height - 20, AutumnNuts.crc2.canvas.height - 100)));
             this.velocity.random(50, 120);
             this.size = AutumnNuts.calculateRandom(0.9, 1.3);
+            this.isEating = false;
         }
         move(_timeslice) {
             super.move(_timeslice);
@@ -21,7 +22,10 @@ var AutumnNuts;
             else if (this.position.y < AutumnNuts.crc2.canvas.height - 100) {
                 this.velocity.random(50, 120, 0, Math.PI);
             }
-            if (this.velocity.x > 0) {
+            if (this.velocity.length() == 0) {
+                this.facing = this.facing;
+            }
+            else if (this.velocity.x > 0) {
                 this.facing = "right";
             }
             else {
@@ -30,6 +34,7 @@ var AutumnNuts;
             if (this.target) {
                 if (this.velocity.length() * _timeslice > new AutumnNuts.Vector(this.target.position.x - this.position.x, this.target.position.y - this.position.y).length()) {
                     this.velocity.set(0, 0);
+                    this.eat();
                 }
             }
         }
@@ -43,25 +48,44 @@ var AutumnNuts;
             AutumnNuts.drawSquirrel();
             AutumnNuts.crc2.restore();
         }
-        search(_array) {
-            let nut = undefined;
-            let distance = Infinity;
-            for (let thing of _array) {
-                if (thing instanceof AutumnNuts.Nut == true) {
-                    let thisNut = thing;
-                    let thisDistance = new AutumnNuts.Vector(this.position.x - thisNut.position.x, this.position.y - thisNut.position.y).length();
-                    if (thisDistance < distance) {
-                        distance = thisDistance;
-                        nut = thisNut;
+        search() {
+            if (this.isEating == false) {
+                let nut = undefined;
+                let distance = Infinity;
+                for (let thing of AutumnNuts.actives) {
+                    if (thing instanceof AutumnNuts.Nut == true) {
+                        let thisNut = thing;
+                        let thisDistance = new AutumnNuts.Vector(this.position.x - thisNut.position.x, this.position.y - thisNut.position.y).length();
+                        if (thisDistance < distance) {
+                            distance = thisDistance;
+                            nut = thisNut;
+                        }
                     }
                 }
+                if (nut) {
+                    if (nut != this.target) {
+                        let distance = new AutumnNuts.Vector(nut.position.x - this.position.x, nut.position.y - this.position.y);
+                        this.velocity.set(distance.x, distance.y);
+                        this.velocity.scale((100 / distance.length()) * AutumnNuts.calculateRandom(.3, 1.5));
+                        this.target = nut;
+                    }
+                }
+                else {
+                    this.velocity.random(50, 120);
+                }
             }
-            if (nut) {
-                this.velocity.set(nut.position.x - this.position.x, nut.position.y - this.position.y);
-                this.velocity.scale(AutumnNuts.calculateRandom(0.2, 1.3));
-                this.target = nut;
-            }
-            console.log(nut);
+        }
+        eat() {
+            this.isEating = true;
+            let nutEvent = new CustomEvent("eat", { bubbles: true, detail: { nut: this.target } });
+            AutumnNuts.crc2.canvas.dispatchEvent(nutEvent);
+            this.target = undefined;
+            setTimeout(this.swallow, 3000);
+        }
+        swallow() {
+            console.log("swallowed!");
+            this.isEating = false;
+            this.search();
         }
     }
     AutumnNuts.Squirrel = Squirrel;

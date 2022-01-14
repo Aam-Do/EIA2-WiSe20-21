@@ -1,14 +1,16 @@
 namespace AutumnNuts {
     export class Squirrel extends Moveable {
+        public isEating: boolean;
         private facing: string;
         private size: number;
-        private target: Nut;
+        private target: Nut | undefined;
 
         constructor() {
             super(new Vector(calculateRandom(crc2.canvas.width * 0.15, crc2.canvas.width * 0.75), calculateRandom(crc2.canvas.height - 20, crc2.canvas.height - 100)));
             this.velocity.random(50, 120);
 
             this.size = calculateRandom(0.9, 1.3);
+            this.isEating = false;
         }
 
         public move(_timeslice: number): void {
@@ -27,7 +29,10 @@ namespace AutumnNuts {
                 this.velocity.random(50, 120, 0, Math.PI);
             }
 
-            if (this.velocity.x > 0) {
+            if (this.velocity.length() == 0) {
+                this.facing = this.facing;
+            }
+            else if (this.velocity.x > 0) {
                 this.facing = "right";
             }
             else {
@@ -37,6 +42,7 @@ namespace AutumnNuts {
             if (this.target) {
                 if (this.velocity.length() * _timeslice > new Vector(this.target.position.x - this.position.x, this.target.position.y - this.position.y).length()) {
                     this.velocity.set(0, 0);
+                    this.eat();
                 }
             }
         }
@@ -52,25 +58,46 @@ namespace AutumnNuts {
             crc2.restore();
         }
 
-        public search(_array: Moveable[]): void {
-            let nut: Nut | undefined = undefined;
-            let distance: number = Infinity;
-            for (let thing of _array) {
-                if (thing instanceof Nut == true) {
-                    let thisNut: Nut = <Nut>thing;
-                    let thisDistance: number = new Vector(this.position.x - thisNut.position.x, this.position.y - thisNut.position.y).length();
-                    if (thisDistance < distance) {
-                        distance = thisDistance;
-                        nut = thisNut;
+        public search(): void {
+            if (this.isEating == false) {
+                let nut: Nut | undefined = undefined;
+                let distance: number = Infinity;
+                for (let thing of actives) {
+                    if (thing instanceof Nut == true) {
+                        let thisNut: Nut = <Nut>thing;
+                        let thisDistance: number = new Vector(this.position.x - thisNut.position.x, this.position.y - thisNut.position.y).length();
+                        if (thisDistance < distance) {
+                            distance = thisDistance;
+                            nut = thisNut;
+                        }
                     }
                 }
+                if (nut) {
+                    if (nut != this.target) {
+                        let distance: Vector = new Vector(nut.position.x - this.position.x, nut.position.y - this.position.y);
+                        this.velocity.set(distance.x, distance.y);
+                        this.velocity.scale((100 / distance.length()) * calculateRandom(.3, 1.5));
+                        this.target = nut;
+                    }
+                }
+                else {
+                    this.velocity.random(50, 120);
+                }
             }
-            if (nut) {
-                this.velocity.set(nut.position.x - this.position.x, nut.position.y - this.position.y);
-                this.velocity.scale(calculateRandom(0.2, 1.3));
-                this.target = nut;
-            }
-            console.log(nut);
+        }
+
+        private eat(): void {
+            this.isEating = true;
+            let nutEvent: CustomEvent = new CustomEvent("eat", { bubbles: true, detail: { nut: this.target } });
+            crc2.canvas.dispatchEvent(nutEvent);
+            this.target = undefined;
+            setTimeout(this.swallow, 3000);
+        }
+
+        private swallow(): void {
+            console.log("swallowed!");
+            this.isEating = false;
+            this.search();
         }
     }
 }

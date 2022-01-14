@@ -12,18 +12,18 @@ var AutumnNuts;
     let golden = 0.62;
     let horizon;
     let background;
-    let actives = [];
+    AutumnNuts.actives = [];
     let passives = [];
     function hndLoad(_event) {
         let canvas = document.querySelector("canvas");
         canvas.addEventListener("pointerdown", hndClick);
-        // canvas.addEventListener("eat", hndEat);
+        document.addEventListener("eat", hndEat);
         AutumnNuts.crc2 = canvas.getContext("2d");
         horizon = AutumnNuts.crc2.canvas.height * golden;
         let nSquirrels = calculateRandom(1, 5);
         for (let i = 0; i < nSquirrels; i++) {
             let squirrel = new AutumnNuts.Squirrel;
-            actives.push(squirrel);
+            AutumnNuts.actives.push(squirrel);
         }
         let nLeaves = calculateRandom(5, 15);
         for (let i = 0; i < nLeaves; i++) {
@@ -34,11 +34,21 @@ var AutumnNuts;
         background = AutumnNuts.crc2.getImageData(0, 0, AutumnNuts.crc2.canvas.width, AutumnNuts.crc2.canvas.height);
         window.setInterval(update, 50);
     }
-    // function hndEat(_event: CustomEvent): void {
-    //     let nut: Nut = <Nut>_event.target;
-    //     let index: number = actives.indexOf(nut);
-    //     actives.splice(index, 1);
-    // }
+    function hndEat(_event) {
+        let nut = _event.detail.nut;
+        let index = AutumnNuts.actives.indexOf(nut);
+        AutumnNuts.actives.splice(index, 1);
+        squirrelsSearch();
+    }
+    function squirrelsSearch() {
+        let squirrel;
+        for (let active of AutumnNuts.actives) {
+            if (active instanceof AutumnNuts.Squirrel == true) {
+                squirrel = active;
+                squirrel.search();
+            }
+        }
+    }
     function hndClick(_event) {
         let target = _event.target;
         let rect = target.getBoundingClientRect();
@@ -49,14 +59,8 @@ var AutumnNuts;
         }
         else {
             console.log("You placed a nut!");
-            actives.unshift(new AutumnNuts.Nut(pointer));
-            let squirrel;
-            for (let active of actives) {
-                if (active instanceof AutumnNuts.Squirrel == true) {
-                    squirrel = active;
-                    squirrel.search(actives);
-                }
-            }
+            AutumnNuts.actives.unshift(new AutumnNuts.Nut(pointer));
+            squirrelsSearch();
         }
     }
     function drawBackground() {
@@ -75,8 +79,8 @@ var AutumnNuts;
     }
     function update() {
         AutumnNuts.crc2.putImageData(background, 0, 0);
-        actives.sort(function (_a, _b) { return _a.position.y - _b.position.y; });
-        for (let active of actives) {
+        AutumnNuts.actives.sort(function (_a, _b) { return _a.position.y - _b.position.y; });
+        for (let active of AutumnNuts.actives) {
             active.move(1 / 50);
             active.draw();
         }
