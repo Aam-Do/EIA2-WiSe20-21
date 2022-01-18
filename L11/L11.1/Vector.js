@@ -5,6 +5,10 @@ var AutumnNuts;
         constructor(_x, _y) {
             this.set(_x, _y);
         }
+        get length() {
+            let length = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+            return (length);
+        }
         set(_x, _y) {
             this.x = _x;
             this.y = _y;
@@ -20,10 +24,6 @@ var AutumnNuts;
         copy() {
             let copy = new Vector(this.x, this.y);
             return (copy);
-        }
-        length() {
-            let length = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
-            return (length);
         }
         random(_minLength, _maxLength, _minAngle = 0, _maxAngle = 2 * Math.PI) {
             let length = _minLength + Math.random() * (_maxLength - _minLength);

@@ -22,7 +22,7 @@ var AutumnNuts;
             else if (this.position.y < AutumnNuts.crc2.canvas.height - 100) {
                 this.velocity.random(50, 120, 0, Math.PI);
             }
-            if (this.velocity.length() == 0) {
+            if (this.velocity.length == 0) {
                 this.facing = this.facing;
             }
             else if (this.velocity.x > 0) {
@@ -32,7 +32,7 @@ var AutumnNuts;
                 this.facing = "left";
             }
             if (this.target) {
-                if (this.velocity.length() * _timeslice > new AutumnNuts.Vector(this.target.position.x - this.position.x, this.target.position.y - this.position.y).length()) {
+                if (this.velocity.length * _timeslice > new AutumnNuts.Vector(this.target.position.x - this.position.x, this.target.position.y - this.position.y).length) {
                     this.velocity.set(0, 0);
                     this.eat();
                 }
@@ -55,7 +55,7 @@ var AutumnNuts;
                 for (let thing of AutumnNuts.actives) {
                     if (thing instanceof AutumnNuts.Nut == true) {
                         let thisNut = thing;
-                        let thisDistance = new AutumnNuts.Vector(this.position.x - thisNut.position.x, this.position.y - thisNut.position.y).length();
+                        let thisDistance = new AutumnNuts.Vector(this.position.x - thisNut.position.x, this.position.y - thisNut.position.y).length;
                         if (thisDistance < distance) {
                             distance = thisDistance;
                             nut = thisNut;
@@ -66,7 +66,7 @@ var AutumnNuts;
                     if (nut != this.target) {
                         let distance = new AutumnNuts.Vector(nut.position.x - this.position.x, nut.position.y - this.position.y);
                         this.velocity.set(distance.x, distance.y);
-                        this.velocity.scale((100 / distance.length()) * AutumnNuts.calculateRandom(1, 3));
+                        this.velocity.scale((100 / distance.length) * AutumnNuts.calculateRandom(1, 3));
                         this.target = nut;
                     }
                 }

@@ -29,7 +29,7 @@ namespace AutumnNuts {
                 this.velocity.random(50, 120, 0, Math.PI);
             }
 
-            if (this.velocity.length() == 0) {
+            if (this.velocity.length == 0) {
                 this.facing = this.facing;
             }
             else if (this.velocity.x > 0) {
@@ -40,7 +40,7 @@ namespace AutumnNuts {
             }
 
             if (this.target) {
-                if (this.velocity.length() * _timeslice > new Vector(this.target.position.x - this.position.x, this.target.position.y - this.position.y).length()) {
+                if (this.velocity.length * _timeslice > new Vector(this.target.position.x - this.position.x, this.target.position.y - this.position.y).length) {
                     this.velocity.set(0, 0);
                     this.eat();
                 }
@@ -65,7 +65,7 @@ namespace AutumnNuts {
                 for (let thing of actives) {
                     if (thing instanceof Nut == true) {
                         let thisNut: Nut = <Nut>thing;
-                        let thisDistance: number = new Vector(this.position.x - thisNut.position.x, this.position.y - thisNut.position.y).length();
+                        let thisDistance: number = new Vector(this.position.x - thisNut.position.x, this.position.y - thisNut.position.y).length;
                         if (thisDistance < distance) {
                             distance = thisDistance;
                             nut = thisNut;
@@ -76,7 +76,7 @@ namespace AutumnNuts {
                     if (nut != this.target) {
                         let distance: Vector = new Vector(nut.position.x - this.position.x, nut.position.y - this.position.y);
                         this.velocity.set(distance.x, distance.y);
-                        this.velocity.scale((100 / distance.length()) * calculateRandom(1, 3));
+                        this.velocity.scale((100 / distance.length) * calculateRandom(1, 3));
                         this.target = nut;
                     }
                 }

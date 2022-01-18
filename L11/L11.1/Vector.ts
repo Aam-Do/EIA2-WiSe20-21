@@ -7,6 +7,11 @@ namespace AutumnNuts {
             this.set(_x, _y);
         }
 
+        public get length(): number {
+            let length: number = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+            return (length);
+        }
+
         public set(_x: number, _y: number): void {
             this.x = _x;
             this.y = _y;
@@ -24,12 +29,7 @@ namespace AutumnNuts {
 
         public copy(): Vector {
             let copy: Vector = new Vector(this.x, this.y);
-            return(copy);
-        }
-
-        public length(): number {
-            let length: number = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
-            return(length);
+            return (copy);
         }
 
         public random(_minLength: number, _maxLength: number, _minAngle: number = 0, _maxAngle: number = 2 * Math.PI): void {
