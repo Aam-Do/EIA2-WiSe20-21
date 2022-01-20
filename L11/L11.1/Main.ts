@@ -24,6 +24,7 @@ namespace AutumnNuts {
 
         canvas.addEventListener("pointerdown", hndClick);
         canvas.addEventListener("eat", hndEat);
+        canvas.addEventListener("mousemove", hndMove);
 
         crc2 = canvas.getContext("2d")!;
         horizon = crc2.canvas.height * golden;
@@ -44,6 +45,17 @@ namespace AutumnNuts {
         background = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
 
         window.setInterval(update, 50);
+    }
+
+    function hndMove(_event: MouseEvent): void {
+        let target: HTMLElement = <HTMLElement>_event.target;
+        let rect: DOMRect = target.getBoundingClientRect();
+        let scaling: Vector = new Vector(crc2.canvas.height / rect.height, crc2.canvas.width / rect.width);
+        let pointer: Vector = new Vector((_event.clientX - rect.left) * scaling.x, (_event.clientY - rect.top) * scaling.x);
+
+        for (let passive of passives) {
+            passive.push(pointer);
+        }
     }
 
     function hndEat(_event: Event): void {

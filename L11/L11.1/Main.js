@@ -18,6 +18,7 @@ var AutumnNuts;
         let canvas = document.querySelector("canvas");
         canvas.addEventListener("pointerdown", hndClick);
         canvas.addEventListener("eat", hndEat);
+        canvas.addEventListener("mousemove", hndMove);
         AutumnNuts.crc2 = canvas.getContext("2d");
         horizon = AutumnNuts.crc2.canvas.height * golden;
         let nSquirrels = calculateRandom(1, 5);
@@ -33,6 +34,15 @@ var AutumnNuts;
         drawBackground();
         background = AutumnNuts.crc2.getImageData(0, 0, AutumnNuts.crc2.canvas.width, AutumnNuts.crc2.canvas.height);
         window.setInterval(update, 50);
+    }
+    function hndMove(_event) {
+        let target = _event.target;
+        let rect = target.getBoundingClientRect();
+        let scaling = new AutumnNuts.Vector(AutumnNuts.crc2.canvas.height / rect.height, AutumnNuts.crc2.canvas.width / rect.width);
+        let pointer = new AutumnNuts.Vector((_event.clientX - rect.left) * scaling.x, (_event.clientY - rect.top) * scaling.x);
+        for (let passive of passives) {
+            passive.push(pointer);
+        }
     }
     function hndEat(_event) {
         let nut = _event.detail.nut;
