@@ -26,7 +26,7 @@ var AutumnNuts;
             let squirrel = new AutumnNuts.Squirrel;
             AutumnNuts.actives.push(squirrel);
         }
-        let nLeaves = calculateRandom(5, 15);
+        let nLeaves = calculateRandom(10, 20);
         for (let i = 0; i < nLeaves; i++) {
             let leaf = new AutumnNuts.Leaf;
             passives.push(leaf);

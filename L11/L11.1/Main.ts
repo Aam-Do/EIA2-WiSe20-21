@@ -35,7 +35,7 @@ namespace AutumnNuts {
             actives.push(squirrel);
         }
 
-        let nLeaves: number = calculateRandom(5, 15);
+        let nLeaves: number = calculateRandom(10, 20);
         for (let i: number = 0; i < nLeaves; i++) {
             let leaf: Leaf = new Leaf;
             passives.push(leaf);
