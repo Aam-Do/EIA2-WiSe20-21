@@ -18,5 +18,16 @@ var RandomPoem;
         verse += _objects.splice(randomObject, 1)[0];
         return (verse);
     }
+    let greets = [{ greet: "Hi" }, { greet: "Hallo" }, { greet: "Servus" }];
+    try {
+        let input = prompt("Lass dich grüßen!", "Gib hier eine Zahl ein");
+        let greet = greets[Number(input)].greet;
+        alert(greet);
+    }
+    catch (_error) {
+        alert("Tschüss!");
+        console.log(_error);
+    }
+    console.log("Done");
 })(RandomPoem || (RandomPoem = {}));
 //# sourceMappingURL=Script.js.map
